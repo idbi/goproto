@@ -1,0 +1,77 @@
+# based on https://github.com/mvdan/github-actions-golang
+name: Generate
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  generate:
+    if: (github.actor != 'github-actions[bot]')
+    permissions:
+      contents: write
+      pull-requests: write
+    strategy:
+      matrix:
+        go-version: [1.21.x]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v2
+
+      # cache go modules
+      - uses: actions/cache@v3
+        with:
+          # In order:
+          # * Module download cache
+          # * Build cache (Linux)
+          # * Build cache (Mac)
+          # * Build cache (Windows)
+          path: |
+            ~/go/pkg/mod
+            ~/.cache/go-build
+            ~/Library/Caches/go-build
+            %LocalAppData%\go-build
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Get current submodule hash
+        run: echo "COMMIT_HASH=$(git rev-parse HEAD:proto)" >> $GITHUB_ENV
+
+      - name: Update submodules
+        run: git submodule update --init --recursive --remote
+
+      - name: Clean up
+        run: ls -l proto | grep '^d' | awk -F ' ' '{print $9}' | xargs -I {} rm -rf {}
+
+      - name: Lint proto files
+        run: make protolint
+
+      - name: Generate proto files
+        run: make proto
+
+      - name: Get commits since last COMMIT_HASH in submodule
+        run: |
+          cd proto
+          echo "COMMIT_MSG=$(git log --no-merges --pretty=format:"%s [gsols/proto-apis@%H]" --reverse $COMMIT_HASH..HEAD)" >> $GITHUB_ENV
+          cd ..
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "${{env.COMMIT_MSG}}"
+          title: "Build proto files using remote submodule"
+          body: "${{env.COMMIT_MSG}}"
