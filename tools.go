@@ -32,7 +32,6 @@ import (
 	_ "github.com/bufbuild/buf/cmd/buf"
 	_ "github.com/bufbuild/buf/cmd/protoc-gen-buf-breaking"
 	_ "github.com/bufbuild/buf/cmd/protoc-gen-buf-lint"
-	_ "github.com/cosmtrek/air"
 	_ "github.com/envoyproxy/protoc-gen-validate"
 	_ "golang.org/x/tools/cmd/goimports"
 	_ "google.golang.org/grpc/cmd/protoc-gen-go-grpc"
