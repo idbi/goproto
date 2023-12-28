@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.0.1 (2023-12-28)
+
+
+### Features
+
+* add breaking ([5bffe2a](https://github.com/idbi/goproto/commit/5bffe2a685d4a65b82561ef170b76bcac250c65c))
+* add integrations apis fix: namespaces [gsols/proto-apis@019675a03da52577d6a0c266642ed109c27ca311] ([9ac5bbf](https://github.com/idbi/goproto/commit/9ac5bbf2dd4b7c439cb89ab90a7000766a4fb890))
+* remove raw folder ([83af71b](https://github.com/idbi/goproto/commit/83af71bc0048f9d8cf4f887d95a5ba2f2498ae48))
+
+
+### Bug Fixes
+
+* use repository ([d779798](https://github.com/idbi/goproto/commit/d7797987e11c113bceceb2dda839c5936109e6ea))
+* validation rules [idbi/proto-apis@d221bbf97b54237a0b488b5df30e756ad7d96d7d] ([18be60b](https://github.com/idbi/goproto/commit/18be60bbcfae5ecc060f7c62fccea9caa9adaad3))
+
+
+### Miscellaneous Chores
+
+* release 0.0.1 ([17ed7e6](https://github.com/idbi/goproto/commit/17ed7e674bd0c342cc9245a69d981246d9720da6))
+
 ## [0.1.24](https://github.com/gsols/goproto/compare/v0.1.23...v0.1.24) (2023-12-10)
 
 
