@@ -1,5 +1,5 @@
 # based on https://github.com/mvdan/github-actions-golang
-name: Generate
+name: Buf linters
 
 on:
   # Allows you to run this workflow manually from the Actions tab
