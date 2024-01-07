@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.5](https://github.com/idbi/goproto/compare/v0.0.4...v0.0.5) (2024-01-07)
+
+
+### Bug Fixes
+
+* rename variable [idbi/proto-apis@a4890216fcfcba76fee15d79e764989069375eb3] ([3d83ebf](https://github.com/idbi/goproto/commit/3d83ebf95cac5b03cd2204ad461a7b6726980f98))
+
 ## [0.0.4](https://github.com/idbi/goproto/compare/v0.0.3...v0.0.4) (2024-01-07)
 
 
