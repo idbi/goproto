@@ -1230,9 +1230,9 @@ func (m *RemoveIntegrationPropertiesRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if l := len(m.GetParameterIds()); l < 1 || l > 100 {
+	if l := len(m.GetPropertyIds()); l < 1 || l > 100 {
 		err := RemoveIntegrationPropertiesRequestValidationError{
-			field:  "ParameterIds",
+			field:  "PropertyIds",
 			reason: "value must contain between 1 and 100 items, inclusive",
 		}
 		if !all {
@@ -1241,14 +1241,14 @@ func (m *RemoveIntegrationPropertiesRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	_RemoveIntegrationPropertiesRequest_ParameterIds_Unique := make(map[string]struct{}, len(m.GetParameterIds()))
+	_RemoveIntegrationPropertiesRequest_PropertyIds_Unique := make(map[string]struct{}, len(m.GetPropertyIds()))
 
-	for idx, item := range m.GetParameterIds() {
+	for idx, item := range m.GetPropertyIds() {
 		_, _ = idx, item
 
-		if _, exists := _RemoveIntegrationPropertiesRequest_ParameterIds_Unique[item]; exists {
+		if _, exists := _RemoveIntegrationPropertiesRequest_PropertyIds_Unique[item]; exists {
 			err := RemoveIntegrationPropertiesRequestValidationError{
-				field:  fmt.Sprintf("ParameterIds[%v]", idx),
+				field:  fmt.Sprintf("PropertyIds[%v]", idx),
 				reason: "repeated value must contain unique items",
 			}
 			if !all {
@@ -1256,14 +1256,14 @@ func (m *RemoveIntegrationPropertiesRequest) validate(all bool) error {
 			}
 			errors = append(errors, err)
 		} else {
-			_RemoveIntegrationPropertiesRequest_ParameterIds_Unique[item] = struct{}{}
+			_RemoveIntegrationPropertiesRequest_PropertyIds_Unique[item] = struct{}{}
 		}
 
 		if item != "" {
 
 			if err := m._validateUuid(item); err != nil {
 				err = RemoveIntegrationPropertiesRequestValidationError{
-					field:  fmt.Sprintf("ParameterIds[%v]", idx),
+					field:  fmt.Sprintf("PropertyIds[%v]", idx),
 					reason: "value must be a valid UUID",
 					cause:  err,
 				}
