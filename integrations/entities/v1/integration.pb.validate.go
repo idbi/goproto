@@ -230,22 +230,22 @@ var _ interface {
 	ErrorName() string
 } = IntegrationValidationError{}
 
-// Validate checks the field values on Parameter with the rules defined in the
+// Validate checks the field values on Property with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *Parameter) Validate() error {
+func (m *Property) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on Parameter with the rules defined in
+// ValidateAll checks the field values on Property with the rules defined in
 // the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in ParameterMultiError, or nil
+// result is a list of violation errors wrapped in PropertyMultiError, or nil
 // if none found.
-func (m *Parameter) ValidateAll() error {
+func (m *Property) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *Parameter) validate(all bool) error {
+func (m *Property) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -255,7 +255,7 @@ func (m *Parameter) validate(all bool) error {
 	if m.GetId() != "" {
 
 		if err := m._validateUuid(m.GetId()); err != nil {
-			err = ParameterValidationError{
+			err = PropertyValidationError{
 				field:  "Id",
 				reason: "value must be a valid UUID",
 				cause:  err,
@@ -269,7 +269,7 @@ func (m *Parameter) validate(all bool) error {
 	}
 
 	if l := utf8.RuneCountInString(m.GetKey()); l < 1 || l > 255 {
-		err := ParameterValidationError{
+		err := PropertyValidationError{
 			field:  "Key",
 			reason: "value length must be between 1 and 255 runes, inclusive",
 		}
@@ -280,7 +280,7 @@ func (m *Parameter) validate(all bool) error {
 	}
 
 	if l := utf8.RuneCountInString(m.GetValue()); l < 1 || l > 255 {
-		err := ParameterValidationError{
+		err := PropertyValidationError{
 			field:  "Value",
 			reason: "value length must be between 1 and 255 runes, inclusive",
 		}
@@ -291,13 +291,13 @@ func (m *Parameter) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ParameterMultiError(errors)
+		return PropertyMultiError(errors)
 	}
 
 	return nil
 }
 
-func (m *Parameter) _validateUuid(uuid string) error {
+func (m *Property) _validateUuid(uuid string) error {
 	if matched := _integration_uuidPattern.MatchString(uuid); !matched {
 		return errors.New("invalid uuid format")
 	}
@@ -305,12 +305,12 @@ func (m *Parameter) _validateUuid(uuid string) error {
 	return nil
 }
 
-// ParameterMultiError is an error wrapping multiple validation errors returned
-// by Parameter.ValidateAll() if the designated constraints aren't met.
-type ParameterMultiError []error
+// PropertyMultiError is an error wrapping multiple validation errors returned
+// by Property.ValidateAll() if the designated constraints aren't met.
+type PropertyMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ParameterMultiError) Error() string {
+func (m PropertyMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -319,11 +319,11 @@ func (m ParameterMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ParameterMultiError) AllErrors() []error { return m }
+func (m PropertyMultiError) AllErrors() []error { return m }
 
-// ParameterValidationError is the validation error returned by
-// Parameter.Validate if the designated constraints aren't met.
-type ParameterValidationError struct {
+// PropertyValidationError is the validation error returned by
+// Property.Validate if the designated constraints aren't met.
+type PropertyValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -331,22 +331,22 @@ type ParameterValidationError struct {
 }
 
 // Field function returns field value.
-func (e ParameterValidationError) Field() string { return e.field }
+func (e PropertyValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ParameterValidationError) Reason() string { return e.reason }
+func (e PropertyValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ParameterValidationError) Cause() error { return e.cause }
+func (e PropertyValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ParameterValidationError) Key() bool { return e.key }
+func (e PropertyValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ParameterValidationError) ErrorName() string { return "ParameterValidationError" }
+func (e PropertyValidationError) ErrorName() string { return "PropertyValidationError" }
 
 // Error satisfies the builtin error interface
-func (e ParameterValidationError) Error() string {
+func (e PropertyValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -358,14 +358,14 @@ func (e ParameterValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sParameter.%s: %s%s",
+		"invalid %sProperty.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ParameterValidationError{}
+var _ error = PropertyValidationError{}
 
 var _ interface {
 	Field() string
@@ -373,4 +373,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ParameterValidationError{}
+} = PropertyValidationError{}
