@@ -59,7 +59,7 @@ func (m *Artifact) validate(all bool) error {
 
 	// no validation rules for Id
 
-	// no validation rules for Artifact
+	// no validation rules for Path
 
 	if all {
 		switch v := interface{}(m.GetTask()).(type) {

@@ -35,6 +35,9 @@ var (
 	_ = sort.Sort
 )
 
+// define the regex for a UUID once up-front
+var _integration_uuidPattern = regexp.MustCompile("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+
 // Validate checks the field values on Integration with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -57,9 +60,28 @@ func (m *Integration) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Id
+	if err := m._validateUuid(m.GetId()); err != nil {
+		err = IntegrationValidationError{
+			field:  "Id",
+			reason: "value must be a valid UUID",
+			cause:  err,
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
-	// no validation rules for Name
+	if l := utf8.RuneCountInString(m.GetName()); l < 1 || l > 255 {
+		err := IntegrationValidationError{
+			field:  "Name",
+			reason: "value length must be between 1 and 255 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if all {
 		switch v := interface{}(m.GetOwner()).(type) {
@@ -121,6 +143,14 @@ func (m *Integration) validate(all bool) error {
 
 	if len(errors) > 0 {
 		return IntegrationMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *Integration) _validateUuid(uuid string) error {
+	if matched := _integration_uuidPattern.MatchString(uuid); !matched {
+		return errors.New("invalid uuid format")
 	}
 
 	return nil
@@ -218,12 +248,50 @@ func (m *Parameter) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Key
+	if err := m._validateUuid(m.GetId()); err != nil {
+		err = ParameterValidationError{
+			field:  "Id",
+			reason: "value must be a valid UUID",
+			cause:  err,
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
-	// no validation rules for Value
+	if l := utf8.RuneCountInString(m.GetKey()); l < 1 || l > 255 {
+		err := ParameterValidationError{
+			field:  "Key",
+			reason: "value length must be between 1 and 255 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if l := utf8.RuneCountInString(m.GetValue()); l < 1 || l > 255 {
+		err := ParameterValidationError{
+			field:  "Value",
+			reason: "value length must be between 1 and 255 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return ParameterMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *Parameter) _validateUuid(uuid string) error {
+	if matched := _integration_uuidPattern.MatchString(uuid); !matched {
+		return errors.New("invalid uuid format")
 	}
 
 	return nil
