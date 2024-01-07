@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.2](https://github.com/idbi/goproto/compare/v0.0.1...v0.0.2) (2024-01-07)
+
+
+### Bug Fixes
+
+* match external api to internal actions [idbi/proto-apis@a4f9d8556c1b8dbc2f171fb3aeffdaa3ded367a0] ([a1f25b5](https://github.com/idbi/goproto/commit/a1f25b5e01e29a98524c25f56c5e71774ddccce2))
+
 ## 0.0.1 (2023-12-28)
 
 
