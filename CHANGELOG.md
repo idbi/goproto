@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.6](https://github.com/idbi/goproto/compare/v0.0.5...v0.0.6) (2024-01-07)
+
+
+### Bug Fixes
+
+* incorrect variable name. replace parameters by properties [idbi/proto-apis@6021d89be6dc2a5beeb09b35deb098b718476686] ([3a9299e](https://github.com/idbi/goproto/commit/3a9299e0676df3464593eeb53f77b97cff57da69))
+
 ## [0.0.5](https://github.com/idbi/goproto/compare/v0.0.4...v0.0.5) (2024-01-07)
 
 
