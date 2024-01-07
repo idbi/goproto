@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/idbi/goproto/compare/v0.0.3...v0.0.4) (2024-01-07)
+
+
+### Bug Fixes
+
+* validation rules on empty body [idbi/proto-apis@ba36521a4e98700a8b9b28bbaaaed9f8680689c1] ([91e967e](https://github.com/idbi/goproto/commit/91e967ee16b873faafe96e6690b4f5fa640e0c23))
+
 ## [0.0.3](https://github.com/idbi/goproto/compare/v0.0.2...v0.0.3) (2024-01-07)
 
 
