@@ -611,23 +611,23 @@ var _ interface {
 	ErrorName() string
 } = RegisterIntegrationResponseValidationError{}
 
-// Validate checks the field values on RegisterIntegrationParametersRequest
+// Validate checks the field values on RegisterIntegrationPropertiesRequest
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the first error encountered is returned, or nil if
 // there are no violations.
-func (m *RegisterIntegrationParametersRequest) Validate() error {
+func (m *RegisterIntegrationPropertiesRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on RegisterIntegrationParametersRequest
+// ValidateAll checks the field values on RegisterIntegrationPropertiesRequest
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the result is a list of violation errors wrapped in
-// RegisterIntegrationParametersRequestMultiError, or nil if none found.
-func (m *RegisterIntegrationParametersRequest) ValidateAll() error {
+// RegisterIntegrationPropertiesRequestMultiError, or nil if none found.
+func (m *RegisterIntegrationPropertiesRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *RegisterIntegrationParametersRequest) validate(all bool) error {
+func (m *RegisterIntegrationPropertiesRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -635,7 +635,7 @@ func (m *RegisterIntegrationParametersRequest) validate(all bool) error {
 	var errors []error
 
 	if err := m._validateUuid(m.GetIntegrationId()); err != nil {
-		err = RegisterIntegrationParametersRequestValidationError{
+		err = RegisterIntegrationPropertiesRequestValidationError{
 			field:  "IntegrationId",
 			reason: "value must be a valid UUID",
 			cause:  err,
@@ -653,7 +653,7 @@ func (m *RegisterIntegrationParametersRequest) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, RegisterIntegrationParametersRequestValidationError{
+					errors = append(errors, RegisterIntegrationPropertiesRequestValidationError{
 						field:  fmt.Sprintf("Parameters[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -661,7 +661,7 @@ func (m *RegisterIntegrationParametersRequest) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, RegisterIntegrationParametersRequestValidationError{
+					errors = append(errors, RegisterIntegrationPropertiesRequestValidationError{
 						field:  fmt.Sprintf("Parameters[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -670,7 +670,7 @@ func (m *RegisterIntegrationParametersRequest) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return RegisterIntegrationParametersRequestValidationError{
+				return RegisterIntegrationPropertiesRequestValidationError{
 					field:  fmt.Sprintf("Parameters[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -681,13 +681,13 @@ func (m *RegisterIntegrationParametersRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return RegisterIntegrationParametersRequestMultiError(errors)
+		return RegisterIntegrationPropertiesRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-func (m *RegisterIntegrationParametersRequest) _validateUuid(uuid string) error {
+func (m *RegisterIntegrationPropertiesRequest) _validateUuid(uuid string) error {
 	if matched := _messages_uuidPattern.MatchString(uuid); !matched {
 		return errors.New("invalid uuid format")
 	}
@@ -695,14 +695,14 @@ func (m *RegisterIntegrationParametersRequest) _validateUuid(uuid string) error 
 	return nil
 }
 
-// RegisterIntegrationParametersRequestMultiError is an error wrapping multiple
+// RegisterIntegrationPropertiesRequestMultiError is an error wrapping multiple
 // validation errors returned by
-// RegisterIntegrationParametersRequest.ValidateAll() if the designated
+// RegisterIntegrationPropertiesRequest.ValidateAll() if the designated
 // constraints aren't met.
-type RegisterIntegrationParametersRequestMultiError []error
+type RegisterIntegrationPropertiesRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m RegisterIntegrationParametersRequestMultiError) Error() string {
+func (m RegisterIntegrationPropertiesRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -711,12 +711,12 @@ func (m RegisterIntegrationParametersRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m RegisterIntegrationParametersRequestMultiError) AllErrors() []error { return m }
+func (m RegisterIntegrationPropertiesRequestMultiError) AllErrors() []error { return m }
 
-// RegisterIntegrationParametersRequestValidationError is the validation error
-// returned by RegisterIntegrationParametersRequest.Validate if the designated
+// RegisterIntegrationPropertiesRequestValidationError is the validation error
+// returned by RegisterIntegrationPropertiesRequest.Validate if the designated
 // constraints aren't met.
-type RegisterIntegrationParametersRequestValidationError struct {
+type RegisterIntegrationPropertiesRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -724,24 +724,24 @@ type RegisterIntegrationParametersRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e RegisterIntegrationParametersRequestValidationError) Field() string { return e.field }
+func (e RegisterIntegrationPropertiesRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e RegisterIntegrationParametersRequestValidationError) Reason() string { return e.reason }
+func (e RegisterIntegrationPropertiesRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e RegisterIntegrationParametersRequestValidationError) Cause() error { return e.cause }
+func (e RegisterIntegrationPropertiesRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e RegisterIntegrationParametersRequestValidationError) Key() bool { return e.key }
+func (e RegisterIntegrationPropertiesRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e RegisterIntegrationParametersRequestValidationError) ErrorName() string {
-	return "RegisterIntegrationParametersRequestValidationError"
+func (e RegisterIntegrationPropertiesRequestValidationError) ErrorName() string {
+	return "RegisterIntegrationPropertiesRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e RegisterIntegrationParametersRequestValidationError) Error() string {
+func (e RegisterIntegrationPropertiesRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -753,14 +753,14 @@ func (e RegisterIntegrationParametersRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sRegisterIntegrationParametersRequest.%s: %s%s",
+		"invalid %sRegisterIntegrationPropertiesRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = RegisterIntegrationParametersRequestValidationError{}
+var _ error = RegisterIntegrationPropertiesRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -768,25 +768,25 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = RegisterIntegrationParametersRequestValidationError{}
+} = RegisterIntegrationPropertiesRequestValidationError{}
 
-// Validate checks the field values on RegisterIntegrationParametersResponse
+// Validate checks the field values on RegisterIntegrationPropertiesResponse
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the first error encountered is returned, or nil if
 // there are no violations.
-func (m *RegisterIntegrationParametersResponse) Validate() error {
+func (m *RegisterIntegrationPropertiesResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on RegisterIntegrationParametersResponse
+// ValidateAll checks the field values on RegisterIntegrationPropertiesResponse
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the result is a list of violation errors wrapped in
-// RegisterIntegrationParametersResponseMultiError, or nil if none found.
-func (m *RegisterIntegrationParametersResponse) ValidateAll() error {
+// RegisterIntegrationPropertiesResponseMultiError, or nil if none found.
+func (m *RegisterIntegrationPropertiesResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *RegisterIntegrationParametersResponse) validate(all bool) error {
+func (m *RegisterIntegrationPropertiesResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -797,7 +797,7 @@ func (m *RegisterIntegrationParametersResponse) validate(all bool) error {
 		switch v := interface{}(m.GetResult()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, RegisterIntegrationParametersResponseValidationError{
+				errors = append(errors, RegisterIntegrationPropertiesResponseValidationError{
 					field:  "Result",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -805,7 +805,7 @@ func (m *RegisterIntegrationParametersResponse) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, RegisterIntegrationParametersResponseValidationError{
+				errors = append(errors, RegisterIntegrationPropertiesResponseValidationError{
 					field:  "Result",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -814,7 +814,7 @@ func (m *RegisterIntegrationParametersResponse) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetResult()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return RegisterIntegrationParametersResponseValidationError{
+			return RegisterIntegrationPropertiesResponseValidationError{
 				field:  "Result",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -823,20 +823,20 @@ func (m *RegisterIntegrationParametersResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return RegisterIntegrationParametersResponseMultiError(errors)
+		return RegisterIntegrationPropertiesResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// RegisterIntegrationParametersResponseMultiError is an error wrapping
+// RegisterIntegrationPropertiesResponseMultiError is an error wrapping
 // multiple validation errors returned by
-// RegisterIntegrationParametersResponse.ValidateAll() if the designated
+// RegisterIntegrationPropertiesResponse.ValidateAll() if the designated
 // constraints aren't met.
-type RegisterIntegrationParametersResponseMultiError []error
+type RegisterIntegrationPropertiesResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m RegisterIntegrationParametersResponseMultiError) Error() string {
+func (m RegisterIntegrationPropertiesResponseMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -845,12 +845,12 @@ func (m RegisterIntegrationParametersResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m RegisterIntegrationParametersResponseMultiError) AllErrors() []error { return m }
+func (m RegisterIntegrationPropertiesResponseMultiError) AllErrors() []error { return m }
 
-// RegisterIntegrationParametersResponseValidationError is the validation error
-// returned by RegisterIntegrationParametersResponse.Validate if the
+// RegisterIntegrationPropertiesResponseValidationError is the validation error
+// returned by RegisterIntegrationPropertiesResponse.Validate if the
 // designated constraints aren't met.
-type RegisterIntegrationParametersResponseValidationError struct {
+type RegisterIntegrationPropertiesResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -858,24 +858,24 @@ type RegisterIntegrationParametersResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e RegisterIntegrationParametersResponseValidationError) Field() string { return e.field }
+func (e RegisterIntegrationPropertiesResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e RegisterIntegrationParametersResponseValidationError) Reason() string { return e.reason }
+func (e RegisterIntegrationPropertiesResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e RegisterIntegrationParametersResponseValidationError) Cause() error { return e.cause }
+func (e RegisterIntegrationPropertiesResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e RegisterIntegrationParametersResponseValidationError) Key() bool { return e.key }
+func (e RegisterIntegrationPropertiesResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e RegisterIntegrationParametersResponseValidationError) ErrorName() string {
-	return "RegisterIntegrationParametersResponseValidationError"
+func (e RegisterIntegrationPropertiesResponseValidationError) ErrorName() string {
+	return "RegisterIntegrationPropertiesResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e RegisterIntegrationParametersResponseValidationError) Error() string {
+func (e RegisterIntegrationPropertiesResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -887,14 +887,14 @@ func (e RegisterIntegrationParametersResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sRegisterIntegrationParametersResponse.%s: %s%s",
+		"invalid %sRegisterIntegrationPropertiesResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = RegisterIntegrationParametersResponseValidationError{}
+var _ error = RegisterIntegrationPropertiesResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -902,24 +902,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = RegisterIntegrationParametersResponseValidationError{}
+} = RegisterIntegrationPropertiesResponseValidationError{}
 
-// Validate checks the field values on GetIntegrationParametersRequest with the
+// Validate checks the field values on GetIntegrationPropertiesRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetIntegrationParametersRequest) Validate() error {
+func (m *GetIntegrationPropertiesRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetIntegrationParametersRequest with
+// ValidateAll checks the field values on GetIntegrationPropertiesRequest with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the result is a list of violation errors wrapped in
-// GetIntegrationParametersRequestMultiError, or nil if none found.
-func (m *GetIntegrationParametersRequest) ValidateAll() error {
+// GetIntegrationPropertiesRequestMultiError, or nil if none found.
+func (m *GetIntegrationPropertiesRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetIntegrationParametersRequest) validate(all bool) error {
+func (m *GetIntegrationPropertiesRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -927,7 +927,7 @@ func (m *GetIntegrationParametersRequest) validate(all bool) error {
 	var errors []error
 
 	if err := m._validateUuid(m.GetIntegrationId()); err != nil {
-		err = GetIntegrationParametersRequestValidationError{
+		err = GetIntegrationPropertiesRequestValidationError{
 			field:  "IntegrationId",
 			reason: "value must be a valid UUID",
 			cause:  err,
@@ -939,13 +939,13 @@ func (m *GetIntegrationParametersRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return GetIntegrationParametersRequestMultiError(errors)
+		return GetIntegrationPropertiesRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-func (m *GetIntegrationParametersRequest) _validateUuid(uuid string) error {
+func (m *GetIntegrationPropertiesRequest) _validateUuid(uuid string) error {
 	if matched := _messages_uuidPattern.MatchString(uuid); !matched {
 		return errors.New("invalid uuid format")
 	}
@@ -953,13 +953,13 @@ func (m *GetIntegrationParametersRequest) _validateUuid(uuid string) error {
 	return nil
 }
 
-// GetIntegrationParametersRequestMultiError is an error wrapping multiple
-// validation errors returned by GetIntegrationParametersRequest.ValidateAll()
+// GetIntegrationPropertiesRequestMultiError is an error wrapping multiple
+// validation errors returned by GetIntegrationPropertiesRequest.ValidateAll()
 // if the designated constraints aren't met.
-type GetIntegrationParametersRequestMultiError []error
+type GetIntegrationPropertiesRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetIntegrationParametersRequestMultiError) Error() string {
+func (m GetIntegrationPropertiesRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -968,12 +968,12 @@ func (m GetIntegrationParametersRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetIntegrationParametersRequestMultiError) AllErrors() []error { return m }
+func (m GetIntegrationPropertiesRequestMultiError) AllErrors() []error { return m }
 
-// GetIntegrationParametersRequestValidationError is the validation error
-// returned by GetIntegrationParametersRequest.Validate if the designated
+// GetIntegrationPropertiesRequestValidationError is the validation error
+// returned by GetIntegrationPropertiesRequest.Validate if the designated
 // constraints aren't met.
-type GetIntegrationParametersRequestValidationError struct {
+type GetIntegrationPropertiesRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -981,24 +981,24 @@ type GetIntegrationParametersRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetIntegrationParametersRequestValidationError) Field() string { return e.field }
+func (e GetIntegrationPropertiesRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetIntegrationParametersRequestValidationError) Reason() string { return e.reason }
+func (e GetIntegrationPropertiesRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetIntegrationParametersRequestValidationError) Cause() error { return e.cause }
+func (e GetIntegrationPropertiesRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetIntegrationParametersRequestValidationError) Key() bool { return e.key }
+func (e GetIntegrationPropertiesRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetIntegrationParametersRequestValidationError) ErrorName() string {
-	return "GetIntegrationParametersRequestValidationError"
+func (e GetIntegrationPropertiesRequestValidationError) ErrorName() string {
+	return "GetIntegrationPropertiesRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetIntegrationParametersRequestValidationError) Error() string {
+func (e GetIntegrationPropertiesRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1010,14 +1010,14 @@ func (e GetIntegrationParametersRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetIntegrationParametersRequest.%s: %s%s",
+		"invalid %sGetIntegrationPropertiesRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetIntegrationParametersRequestValidationError{}
+var _ error = GetIntegrationPropertiesRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1025,25 +1025,25 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetIntegrationParametersRequestValidationError{}
+} = GetIntegrationPropertiesRequestValidationError{}
 
-// Validate checks the field values on GetIntegrationParametersResponse with
+// Validate checks the field values on GetIntegrationPropertiesResponse with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
 // no violations.
-func (m *GetIntegrationParametersResponse) Validate() error {
+func (m *GetIntegrationPropertiesResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetIntegrationParametersResponse with
+// ValidateAll checks the field values on GetIntegrationPropertiesResponse with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the result is a list of violation errors wrapped in
-// GetIntegrationParametersResponseMultiError, or nil if none found.
-func (m *GetIntegrationParametersResponse) ValidateAll() error {
+// GetIntegrationPropertiesResponseMultiError, or nil if none found.
+func (m *GetIntegrationPropertiesResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetIntegrationParametersResponse) validate(all bool) error {
+func (m *GetIntegrationPropertiesResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1054,7 +1054,7 @@ func (m *GetIntegrationParametersResponse) validate(all bool) error {
 		switch v := interface{}(m.GetResult()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetIntegrationParametersResponseValidationError{
+				errors = append(errors, GetIntegrationPropertiesResponseValidationError{
 					field:  "Result",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1062,7 +1062,7 @@ func (m *GetIntegrationParametersResponse) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetIntegrationParametersResponseValidationError{
+				errors = append(errors, GetIntegrationPropertiesResponseValidationError{
 					field:  "Result",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1071,7 +1071,7 @@ func (m *GetIntegrationParametersResponse) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetResult()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetIntegrationParametersResponseValidationError{
+			return GetIntegrationPropertiesResponseValidationError{
 				field:  "Result",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -1086,7 +1086,7 @@ func (m *GetIntegrationParametersResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetIntegrationParametersResponseValidationError{
+					errors = append(errors, GetIntegrationPropertiesResponseValidationError{
 						field:  fmt.Sprintf("Parameters[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -1094,7 +1094,7 @@ func (m *GetIntegrationParametersResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, GetIntegrationParametersResponseValidationError{
+					errors = append(errors, GetIntegrationPropertiesResponseValidationError{
 						field:  fmt.Sprintf("Parameters[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -1103,7 +1103,7 @@ func (m *GetIntegrationParametersResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return GetIntegrationParametersResponseValidationError{
+				return GetIntegrationPropertiesResponseValidationError{
 					field:  fmt.Sprintf("Parameters[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1114,20 +1114,20 @@ func (m *GetIntegrationParametersResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return GetIntegrationParametersResponseMultiError(errors)
+		return GetIntegrationPropertiesResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetIntegrationParametersResponseMultiError is an error wrapping multiple
+// GetIntegrationPropertiesResponseMultiError is an error wrapping multiple
 // validation errors returned by
-// GetIntegrationParametersResponse.ValidateAll() if the designated
+// GetIntegrationPropertiesResponse.ValidateAll() if the designated
 // constraints aren't met.
-type GetIntegrationParametersResponseMultiError []error
+type GetIntegrationPropertiesResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetIntegrationParametersResponseMultiError) Error() string {
+func (m GetIntegrationPropertiesResponseMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1136,12 +1136,12 @@ func (m GetIntegrationParametersResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetIntegrationParametersResponseMultiError) AllErrors() []error { return m }
+func (m GetIntegrationPropertiesResponseMultiError) AllErrors() []error { return m }
 
-// GetIntegrationParametersResponseValidationError is the validation error
-// returned by GetIntegrationParametersResponse.Validate if the designated
+// GetIntegrationPropertiesResponseValidationError is the validation error
+// returned by GetIntegrationPropertiesResponse.Validate if the designated
 // constraints aren't met.
-type GetIntegrationParametersResponseValidationError struct {
+type GetIntegrationPropertiesResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1149,24 +1149,24 @@ type GetIntegrationParametersResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetIntegrationParametersResponseValidationError) Field() string { return e.field }
+func (e GetIntegrationPropertiesResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetIntegrationParametersResponseValidationError) Reason() string { return e.reason }
+func (e GetIntegrationPropertiesResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetIntegrationParametersResponseValidationError) Cause() error { return e.cause }
+func (e GetIntegrationPropertiesResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetIntegrationParametersResponseValidationError) Key() bool { return e.key }
+func (e GetIntegrationPropertiesResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetIntegrationParametersResponseValidationError) ErrorName() string {
-	return "GetIntegrationParametersResponseValidationError"
+func (e GetIntegrationPropertiesResponseValidationError) ErrorName() string {
+	return "GetIntegrationPropertiesResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetIntegrationParametersResponseValidationError) Error() string {
+func (e GetIntegrationPropertiesResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1178,14 +1178,14 @@ func (e GetIntegrationParametersResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetIntegrationParametersResponse.%s: %s%s",
+		"invalid %sGetIntegrationPropertiesResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetIntegrationParametersResponseValidationError{}
+var _ error = GetIntegrationPropertiesResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1193,25 +1193,25 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetIntegrationParametersResponseValidationError{}
+} = GetIntegrationPropertiesResponseValidationError{}
 
-// Validate checks the field values on RemoveIntegrationParametersRequest with
+// Validate checks the field values on RemoveIntegrationPropertiesRequest with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
 // no violations.
-func (m *RemoveIntegrationParametersRequest) Validate() error {
+func (m *RemoveIntegrationPropertiesRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on RemoveIntegrationParametersRequest
+// ValidateAll checks the field values on RemoveIntegrationPropertiesRequest
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the result is a list of violation errors wrapped in
-// RemoveIntegrationParametersRequestMultiError, or nil if none found.
-func (m *RemoveIntegrationParametersRequest) ValidateAll() error {
+// RemoveIntegrationPropertiesRequestMultiError, or nil if none found.
+func (m *RemoveIntegrationPropertiesRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *RemoveIntegrationParametersRequest) validate(all bool) error {
+func (m *RemoveIntegrationPropertiesRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1219,7 +1219,7 @@ func (m *RemoveIntegrationParametersRequest) validate(all bool) error {
 	var errors []error
 
 	if err := m._validateUuid(m.GetIntegrationId()); err != nil {
-		err = RemoveIntegrationParametersRequestValidationError{
+		err = RemoveIntegrationPropertiesRequestValidationError{
 			field:  "IntegrationId",
 			reason: "value must be a valid UUID",
 			cause:  err,
@@ -1231,7 +1231,7 @@ func (m *RemoveIntegrationParametersRequest) validate(all bool) error {
 	}
 
 	if l := len(m.GetParameterIds()); l < 1 || l > 100 {
-		err := RemoveIntegrationParametersRequestValidationError{
+		err := RemoveIntegrationPropertiesRequestValidationError{
 			field:  "ParameterIds",
 			reason: "value must contain between 1 and 100 items, inclusive",
 		}
@@ -1241,13 +1241,13 @@ func (m *RemoveIntegrationParametersRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	_RemoveIntegrationParametersRequest_ParameterIds_Unique := make(map[string]struct{}, len(m.GetParameterIds()))
+	_RemoveIntegrationPropertiesRequest_ParameterIds_Unique := make(map[string]struct{}, len(m.GetParameterIds()))
 
 	for idx, item := range m.GetParameterIds() {
 		_, _ = idx, item
 
-		if _, exists := _RemoveIntegrationParametersRequest_ParameterIds_Unique[item]; exists {
-			err := RemoveIntegrationParametersRequestValidationError{
+		if _, exists := _RemoveIntegrationPropertiesRequest_ParameterIds_Unique[item]; exists {
+			err := RemoveIntegrationPropertiesRequestValidationError{
 				field:  fmt.Sprintf("ParameterIds[%v]", idx),
 				reason: "repeated value must contain unique items",
 			}
@@ -1256,42 +1256,35 @@ func (m *RemoveIntegrationParametersRequest) validate(all bool) error {
 			}
 			errors = append(errors, err)
 		} else {
-			_RemoveIntegrationParametersRequest_ParameterIds_Unique[item] = struct{}{}
+			_RemoveIntegrationPropertiesRequest_ParameterIds_Unique[item] = struct{}{}
 		}
 
-		if l := utf8.RuneCountInString(item); l < 1 || l > 255 {
-			err := RemoveIntegrationParametersRequestValidationError{
-				field:  fmt.Sprintf("ParameterIds[%v]", idx),
-				reason: "value length must be between 1 and 255 runes, inclusive",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
+		if item != "" {
 
-		if err := m._validateUuid(item); err != nil {
-			err = RemoveIntegrationParametersRequestValidationError{
-				field:  fmt.Sprintf("ParameterIds[%v]", idx),
-				reason: "value must be a valid UUID",
-				cause:  err,
+			if err := m._validateUuid(item); err != nil {
+				err = RemoveIntegrationPropertiesRequestValidationError{
+					field:  fmt.Sprintf("ParameterIds[%v]", idx),
+					reason: "value must be a valid UUID",
+					cause:  err,
+				}
+				if !all {
+					return err
+				}
+				errors = append(errors, err)
 			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
+
 		}
 
 	}
 
 	if len(errors) > 0 {
-		return RemoveIntegrationParametersRequestMultiError(errors)
+		return RemoveIntegrationPropertiesRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-func (m *RemoveIntegrationParametersRequest) _validateUuid(uuid string) error {
+func (m *RemoveIntegrationPropertiesRequest) _validateUuid(uuid string) error {
 	if matched := _messages_uuidPattern.MatchString(uuid); !matched {
 		return errors.New("invalid uuid format")
 	}
@@ -1299,14 +1292,14 @@ func (m *RemoveIntegrationParametersRequest) _validateUuid(uuid string) error {
 	return nil
 }
 
-// RemoveIntegrationParametersRequestMultiError is an error wrapping multiple
+// RemoveIntegrationPropertiesRequestMultiError is an error wrapping multiple
 // validation errors returned by
-// RemoveIntegrationParametersRequest.ValidateAll() if the designated
+// RemoveIntegrationPropertiesRequest.ValidateAll() if the designated
 // constraints aren't met.
-type RemoveIntegrationParametersRequestMultiError []error
+type RemoveIntegrationPropertiesRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m RemoveIntegrationParametersRequestMultiError) Error() string {
+func (m RemoveIntegrationPropertiesRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1315,12 +1308,12 @@ func (m RemoveIntegrationParametersRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m RemoveIntegrationParametersRequestMultiError) AllErrors() []error { return m }
+func (m RemoveIntegrationPropertiesRequestMultiError) AllErrors() []error { return m }
 
-// RemoveIntegrationParametersRequestValidationError is the validation error
-// returned by RemoveIntegrationParametersRequest.Validate if the designated
+// RemoveIntegrationPropertiesRequestValidationError is the validation error
+// returned by RemoveIntegrationPropertiesRequest.Validate if the designated
 // constraints aren't met.
-type RemoveIntegrationParametersRequestValidationError struct {
+type RemoveIntegrationPropertiesRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1328,24 +1321,24 @@ type RemoveIntegrationParametersRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e RemoveIntegrationParametersRequestValidationError) Field() string { return e.field }
+func (e RemoveIntegrationPropertiesRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e RemoveIntegrationParametersRequestValidationError) Reason() string { return e.reason }
+func (e RemoveIntegrationPropertiesRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e RemoveIntegrationParametersRequestValidationError) Cause() error { return e.cause }
+func (e RemoveIntegrationPropertiesRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e RemoveIntegrationParametersRequestValidationError) Key() bool { return e.key }
+func (e RemoveIntegrationPropertiesRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e RemoveIntegrationParametersRequestValidationError) ErrorName() string {
-	return "RemoveIntegrationParametersRequestValidationError"
+func (e RemoveIntegrationPropertiesRequestValidationError) ErrorName() string {
+	return "RemoveIntegrationPropertiesRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e RemoveIntegrationParametersRequestValidationError) Error() string {
+func (e RemoveIntegrationPropertiesRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1357,14 +1350,14 @@ func (e RemoveIntegrationParametersRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sRemoveIntegrationParametersRequest.%s: %s%s",
+		"invalid %sRemoveIntegrationPropertiesRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = RemoveIntegrationParametersRequestValidationError{}
+var _ error = RemoveIntegrationPropertiesRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1372,25 +1365,25 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = RemoveIntegrationParametersRequestValidationError{}
+} = RemoveIntegrationPropertiesRequestValidationError{}
 
-// Validate checks the field values on RemoveIntegrationParametersResponse with
+// Validate checks the field values on RemoveIntegrationPropertiesResponse with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
 // no violations.
-func (m *RemoveIntegrationParametersResponse) Validate() error {
+func (m *RemoveIntegrationPropertiesResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on RemoveIntegrationParametersResponse
+// ValidateAll checks the field values on RemoveIntegrationPropertiesResponse
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the result is a list of violation errors wrapped in
-// RemoveIntegrationParametersResponseMultiError, or nil if none found.
-func (m *RemoveIntegrationParametersResponse) ValidateAll() error {
+// RemoveIntegrationPropertiesResponseMultiError, or nil if none found.
+func (m *RemoveIntegrationPropertiesResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *RemoveIntegrationParametersResponse) validate(all bool) error {
+func (m *RemoveIntegrationPropertiesResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1401,7 +1394,7 @@ func (m *RemoveIntegrationParametersResponse) validate(all bool) error {
 		switch v := interface{}(m.GetResult()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, RemoveIntegrationParametersResponseValidationError{
+				errors = append(errors, RemoveIntegrationPropertiesResponseValidationError{
 					field:  "Result",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1409,7 +1402,7 @@ func (m *RemoveIntegrationParametersResponse) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, RemoveIntegrationParametersResponseValidationError{
+				errors = append(errors, RemoveIntegrationPropertiesResponseValidationError{
 					field:  "Result",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1418,7 +1411,7 @@ func (m *RemoveIntegrationParametersResponse) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetResult()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return RemoveIntegrationParametersResponseValidationError{
+			return RemoveIntegrationPropertiesResponseValidationError{
 				field:  "Result",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -1427,20 +1420,20 @@ func (m *RemoveIntegrationParametersResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return RemoveIntegrationParametersResponseMultiError(errors)
+		return RemoveIntegrationPropertiesResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// RemoveIntegrationParametersResponseMultiError is an error wrapping multiple
+// RemoveIntegrationPropertiesResponseMultiError is an error wrapping multiple
 // validation errors returned by
-// RemoveIntegrationParametersResponse.ValidateAll() if the designated
+// RemoveIntegrationPropertiesResponse.ValidateAll() if the designated
 // constraints aren't met.
-type RemoveIntegrationParametersResponseMultiError []error
+type RemoveIntegrationPropertiesResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m RemoveIntegrationParametersResponseMultiError) Error() string {
+func (m RemoveIntegrationPropertiesResponseMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1449,12 +1442,12 @@ func (m RemoveIntegrationParametersResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m RemoveIntegrationParametersResponseMultiError) AllErrors() []error { return m }
+func (m RemoveIntegrationPropertiesResponseMultiError) AllErrors() []error { return m }
 
-// RemoveIntegrationParametersResponseValidationError is the validation error
-// returned by RemoveIntegrationParametersResponse.Validate if the designated
+// RemoveIntegrationPropertiesResponseValidationError is the validation error
+// returned by RemoveIntegrationPropertiesResponse.Validate if the designated
 // constraints aren't met.
-type RemoveIntegrationParametersResponseValidationError struct {
+type RemoveIntegrationPropertiesResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1462,24 +1455,24 @@ type RemoveIntegrationParametersResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e RemoveIntegrationParametersResponseValidationError) Field() string { return e.field }
+func (e RemoveIntegrationPropertiesResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e RemoveIntegrationParametersResponseValidationError) Reason() string { return e.reason }
+func (e RemoveIntegrationPropertiesResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e RemoveIntegrationParametersResponseValidationError) Cause() error { return e.cause }
+func (e RemoveIntegrationPropertiesResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e RemoveIntegrationParametersResponseValidationError) Key() bool { return e.key }
+func (e RemoveIntegrationPropertiesResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e RemoveIntegrationParametersResponseValidationError) ErrorName() string {
-	return "RemoveIntegrationParametersResponseValidationError"
+func (e RemoveIntegrationPropertiesResponseValidationError) ErrorName() string {
+	return "RemoveIntegrationPropertiesResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e RemoveIntegrationParametersResponseValidationError) Error() string {
+func (e RemoveIntegrationPropertiesResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1491,14 +1484,14 @@ func (e RemoveIntegrationParametersResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sRemoveIntegrationParametersResponse.%s: %s%s",
+		"invalid %sRemoveIntegrationPropertiesResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = RemoveIntegrationParametersResponseValidationError{}
+var _ error = RemoveIntegrationPropertiesResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1506,4 +1499,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = RemoveIntegrationParametersResponseValidationError{}
+} = RemoveIntegrationPropertiesResponseValidationError{}

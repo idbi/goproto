@@ -60,7 +60,21 @@ func (m *CreateTaskRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for IntegrationId
+	if m.GetIntegrationId() != "" {
+
+		if err := m._validateUuid(m.GetIntegrationId()); err != nil {
+			err = CreateTaskRequestValidationError{
+				field:  "IntegrationId",
+				reason: "value must be a valid UUID",
+				cause:  err,
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
 
 	for idx, item := range m.GetParameters() {
 		_, _ = idx, item
@@ -98,6 +112,14 @@ func (m *CreateTaskRequest) validate(all bool) error {
 
 	if len(errors) > 0 {
 		return CreateTaskRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *CreateTaskRequest) _validateUuid(uuid string) error {
+	if matched := _messages_uuidPattern.MatchString(uuid); !matched {
+		return errors.New("invalid uuid format")
 	}
 
 	return nil
@@ -358,27 +380,20 @@ func (m *GetTaskRequest) validate(all bool) error {
 
 	var errors []error
 
-	if l := utf8.RuneCountInString(m.GetId()); l < 1 || l > 255 {
-		err := GetTaskRequestValidationError{
-			field:  "Id",
-			reason: "value length must be between 1 and 255 runes, inclusive",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	if m.GetId() != "" {
 
-	if err := m._validateUuid(m.GetId()); err != nil {
-		err = GetTaskRequestValidationError{
-			field:  "Id",
-			reason: "value must be a valid UUID",
-			cause:  err,
+		if err := m._validateUuid(m.GetId()); err != nil {
+			err = GetTaskRequestValidationError{
+				field:  "Id",
+				reason: "value must be a valid UUID",
+				cause:  err,
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
 		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
+
 	}
 
 	if len(errors) > 0 {
@@ -618,27 +633,20 @@ func (m *GetTaskStatusRequest) validate(all bool) error {
 
 	var errors []error
 
-	if l := utf8.RuneCountInString(m.GetId()); l < 1 || l > 255 {
-		err := GetTaskStatusRequestValidationError{
-			field:  "Id",
-			reason: "value length must be between 1 and 255 runes, inclusive",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	if m.GetId() != "" {
 
-	if err := m._validateUuid(m.GetId()); err != nil {
-		err = GetTaskStatusRequestValidationError{
-			field:  "Id",
-			reason: "value must be a valid UUID",
-			cause:  err,
+		if err := m._validateUuid(m.GetId()); err != nil {
+			err = GetTaskStatusRequestValidationError{
+				field:  "Id",
+				reason: "value must be a valid UUID",
+				cause:  err,
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
 		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
+
 	}
 
 	if len(errors) > 0 {
@@ -916,27 +924,20 @@ func (m *GetTaskResultRequest) validate(all bool) error {
 
 	var errors []error
 
-	if l := utf8.RuneCountInString(m.GetId()); l < 1 || l > 255 {
-		err := GetTaskResultRequestValidationError{
-			field:  "Id",
-			reason: "value length must be between 1 and 255 runes, inclusive",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	if m.GetId() != "" {
 
-	if err := m._validateUuid(m.GetId()); err != nil {
-		err = GetTaskResultRequestValidationError{
-			field:  "Id",
-			reason: "value must be a valid UUID",
-			cause:  err,
+		if err := m._validateUuid(m.GetId()); err != nil {
+			err = GetTaskResultRequestValidationError{
+				field:  "Id",
+				reason: "value must be a valid UUID",
+				cause:  err,
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
 		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
+
 	}
 
 	if len(errors) > 0 {
