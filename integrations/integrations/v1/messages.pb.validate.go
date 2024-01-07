@@ -646,7 +646,7 @@ func (m *RegisterIntegrationPropertiesRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	for idx, item := range m.GetParameters() {
+	for idx, item := range m.GetProperties() {
 		_, _ = idx, item
 
 		if all {
@@ -654,7 +654,7 @@ func (m *RegisterIntegrationPropertiesRequest) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, RegisterIntegrationPropertiesRequestValidationError{
-						field:  fmt.Sprintf("Parameters[%v]", idx),
+						field:  fmt.Sprintf("Properties[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -662,7 +662,7 @@ func (m *RegisterIntegrationPropertiesRequest) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, RegisterIntegrationPropertiesRequestValidationError{
-						field:  fmt.Sprintf("Parameters[%v]", idx),
+						field:  fmt.Sprintf("Properties[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -671,7 +671,7 @@ func (m *RegisterIntegrationPropertiesRequest) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return RegisterIntegrationPropertiesRequestValidationError{
-					field:  fmt.Sprintf("Parameters[%v]", idx),
+					field:  fmt.Sprintf("Properties[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -1079,7 +1079,7 @@ func (m *GetIntegrationPropertiesResponse) validate(all bool) error {
 		}
 	}
 
-	for idx, item := range m.GetParameters() {
+	for idx, item := range m.GetProperties() {
 		_, _ = idx, item
 
 		if all {
@@ -1087,7 +1087,7 @@ func (m *GetIntegrationPropertiesResponse) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, GetIntegrationPropertiesResponseValidationError{
-						field:  fmt.Sprintf("Parameters[%v]", idx),
+						field:  fmt.Sprintf("Properties[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1095,7 +1095,7 @@ func (m *GetIntegrationPropertiesResponse) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, GetIntegrationPropertiesResponseValidationError{
-						field:  fmt.Sprintf("Parameters[%v]", idx),
+						field:  fmt.Sprintf("Properties[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1104,7 +1104,7 @@ func (m *GetIntegrationPropertiesResponse) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return GetIntegrationPropertiesResponseValidationError{
-					field:  fmt.Sprintf("Parameters[%v]", idx),
+					field:  fmt.Sprintf("Properties[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
