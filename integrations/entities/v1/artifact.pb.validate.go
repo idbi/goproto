@@ -35,6 +35,9 @@ var (
 	_ = sort.Sort
 )
 
+// define the regex for a UUID once up-front
+var _artifact_uuidPattern = regexp.MustCompile("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+
 // Validate checks the field values on Artifact with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -57,7 +60,21 @@ func (m *Artifact) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Id
+	if m.GetId() != "" {
+
+		if err := m._validateUuid(m.GetId()); err != nil {
+			err = ArtifactValidationError{
+				field:  "Id",
+				reason: "value must be a valid UUID",
+				cause:  err,
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
 
 	// no validation rules for Path
 
@@ -92,6 +109,14 @@ func (m *Artifact) validate(all bool) error {
 
 	if len(errors) > 0 {
 		return ArtifactMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *Artifact) _validateUuid(uuid string) error {
+	if matched := _artifact_uuidPattern.MatchString(uuid); !matched {
+		return errors.New("invalid uuid format")
 	}
 
 	return nil
