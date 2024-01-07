@@ -634,33 +634,16 @@ func (m *RegisterIntegrationParametersRequest) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetIntegration()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, RegisterIntegrationParametersRequestValidationError{
-					field:  "Integration",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, RegisterIntegrationParametersRequestValidationError{
-					field:  "Integration",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
+	if err := m._validateUuid(m.GetIntegrationId()); err != nil {
+		err = RegisterIntegrationParametersRequestValidationError{
+			field:  "IntegrationId",
+			reason: "value must be a valid UUID",
+			cause:  err,
 		}
-	} else if v, ok := interface{}(m.GetIntegration()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return RegisterIntegrationParametersRequestValidationError{
-				field:  "Integration",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
+		if !all {
+			return err
 		}
+		errors = append(errors, err)
 	}
 
 	for idx, item := range m.GetParameters() {
@@ -699,6 +682,14 @@ func (m *RegisterIntegrationParametersRequest) validate(all bool) error {
 
 	if len(errors) > 0 {
 		return RegisterIntegrationParametersRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *RegisterIntegrationParametersRequest) _validateUuid(uuid string) error {
+	if matched := _messages_uuidPattern.MatchString(uuid); !matched {
+		return errors.New("invalid uuid format")
 	}
 
 	return nil
