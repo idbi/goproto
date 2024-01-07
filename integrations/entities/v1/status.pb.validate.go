@@ -58,7 +58,7 @@ func (m *Status) validate(all bool) error {
 
 	// no validation rules for Id
 
-	// no validation rules for Message
+	// no validation rules for Name
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
