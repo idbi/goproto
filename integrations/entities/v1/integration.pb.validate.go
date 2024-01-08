@@ -416,22 +416,22 @@ var _ interface {
 	ErrorName() string
 } = IntegrationTypeValidationError{}
 
-// Validate checks the field values on Property with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *Property) Validate() error {
+// Validate checks the field values on IntegrationProperty with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *IntegrationProperty) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on Property with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in PropertyMultiError, or nil
-// if none found.
-func (m *Property) ValidateAll() error {
+// ValidateAll checks the field values on IntegrationProperty with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// IntegrationPropertyMultiError, or nil if none found.
+func (m *IntegrationProperty) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *Property) validate(all bool) error {
+func (m *IntegrationProperty) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -441,7 +441,7 @@ func (m *Property) validate(all bool) error {
 	if m.GetId() != "" {
 
 		if err := m._validateUuid(m.GetId()); err != nil {
-			err = PropertyValidationError{
+			err = IntegrationPropertyValidationError{
 				field:  "Id",
 				reason: "value must be a valid UUID",
 				cause:  err,
@@ -455,7 +455,7 @@ func (m *Property) validate(all bool) error {
 	}
 
 	if l := utf8.RuneCountInString(m.GetKey()); l < 1 || l > 255 {
-		err := PropertyValidationError{
+		err := IntegrationPropertyValidationError{
 			field:  "Key",
 			reason: "value length must be between 1 and 255 runes, inclusive",
 		}
@@ -466,7 +466,7 @@ func (m *Property) validate(all bool) error {
 	}
 
 	if l := utf8.RuneCountInString(m.GetValue()); l < 1 || l > 255 {
-		err := PropertyValidationError{
+		err := IntegrationPropertyValidationError{
 			field:  "Value",
 			reason: "value length must be between 1 and 255 runes, inclusive",
 		}
@@ -477,13 +477,13 @@ func (m *Property) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return PropertyMultiError(errors)
+		return IntegrationPropertyMultiError(errors)
 	}
 
 	return nil
 }
 
-func (m *Property) _validateUuid(uuid string) error {
+func (m *IntegrationProperty) _validateUuid(uuid string) error {
 	if matched := _integration_uuidPattern.MatchString(uuid); !matched {
 		return errors.New("invalid uuid format")
 	}
@@ -491,12 +491,13 @@ func (m *Property) _validateUuid(uuid string) error {
 	return nil
 }
 
-// PropertyMultiError is an error wrapping multiple validation errors returned
-// by Property.ValidateAll() if the designated constraints aren't met.
-type PropertyMultiError []error
+// IntegrationPropertyMultiError is an error wrapping multiple validation
+// errors returned by IntegrationProperty.ValidateAll() if the designated
+// constraints aren't met.
+type IntegrationPropertyMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m PropertyMultiError) Error() string {
+func (m IntegrationPropertyMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -505,11 +506,11 @@ func (m PropertyMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m PropertyMultiError) AllErrors() []error { return m }
+func (m IntegrationPropertyMultiError) AllErrors() []error { return m }
 
-// PropertyValidationError is the validation error returned by
-// Property.Validate if the designated constraints aren't met.
-type PropertyValidationError struct {
+// IntegrationPropertyValidationError is the validation error returned by
+// IntegrationProperty.Validate if the designated constraints aren't met.
+type IntegrationPropertyValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -517,22 +518,24 @@ type PropertyValidationError struct {
 }
 
 // Field function returns field value.
-func (e PropertyValidationError) Field() string { return e.field }
+func (e IntegrationPropertyValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e PropertyValidationError) Reason() string { return e.reason }
+func (e IntegrationPropertyValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e PropertyValidationError) Cause() error { return e.cause }
+func (e IntegrationPropertyValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e PropertyValidationError) Key() bool { return e.key }
+func (e IntegrationPropertyValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e PropertyValidationError) ErrorName() string { return "PropertyValidationError" }
+func (e IntegrationPropertyValidationError) ErrorName() string {
+	return "IntegrationPropertyValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e PropertyValidationError) Error() string {
+func (e IntegrationPropertyValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -544,14 +547,14 @@ func (e PropertyValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sProperty.%s: %s%s",
+		"invalid %sIntegrationProperty.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = PropertyValidationError{}
+var _ error = IntegrationPropertyValidationError{}
 
 var _ interface {
 	Field() string
@@ -559,4 +562,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = PropertyValidationError{}
+} = IntegrationPropertyValidationError{}

@@ -228,3 +228,148 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = TaskValidationError{}
+
+// Validate checks the field values on TaskProperty with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *TaskProperty) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on TaskProperty with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in TaskPropertyMultiError, or
+// nil if none found.
+func (m *TaskProperty) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *TaskProperty) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetId() != "" {
+
+		if err := m._validateUuid(m.GetId()); err != nil {
+			err = TaskPropertyValidationError{
+				field:  "Id",
+				reason: "value must be a valid UUID",
+				cause:  err,
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
+
+	if l := utf8.RuneCountInString(m.GetKey()); l < 1 || l > 255 {
+		err := TaskPropertyValidationError{
+			field:  "Key",
+			reason: "value length must be between 1 and 255 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if l := utf8.RuneCountInString(m.GetValue()); l < 1 || l > 255 {
+		err := TaskPropertyValidationError{
+			field:  "Value",
+			reason: "value length must be between 1 and 255 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return TaskPropertyMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *TaskProperty) _validateUuid(uuid string) error {
+	if matched := _task_uuidPattern.MatchString(uuid); !matched {
+		return errors.New("invalid uuid format")
+	}
+
+	return nil
+}
+
+// TaskPropertyMultiError is an error wrapping multiple validation errors
+// returned by TaskProperty.ValidateAll() if the designated constraints aren't met.
+type TaskPropertyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m TaskPropertyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m TaskPropertyMultiError) AllErrors() []error { return m }
+
+// TaskPropertyValidationError is the validation error returned by
+// TaskProperty.Validate if the designated constraints aren't met.
+type TaskPropertyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e TaskPropertyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e TaskPropertyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e TaskPropertyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e TaskPropertyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e TaskPropertyValidationError) ErrorName() string { return "TaskPropertyValidationError" }
+
+// Error satisfies the builtin error interface
+func (e TaskPropertyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sTaskProperty.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = TaskPropertyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = TaskPropertyValidationError{}
