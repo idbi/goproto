@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.8](https://github.com/idbi/goproto/compare/v0.0.7...v0.0.8) (2024-01-08)
+
+
+### Bug Fixes
+
+* add propierties to response [idbi/proto-apis@c49784eaa509b1186bfed007034d109879a9e1e7] ([d162a5c](https://github.com/idbi/goproto/commit/d162a5c0ddd408e556ffb6154043d733c0350c43))
+
 ## [0.0.7](https://github.com/idbi/goproto/compare/v0.0.6...v0.0.7) (2024-01-08)
 
 
