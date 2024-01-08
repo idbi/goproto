@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.9](https://github.com/idbi/goproto/compare/v0.0.8...v0.0.9) (2024-01-08)
+
+
+### Bug Fixes
+
+* add result message to response [idbi/proto-apis@c2b82c4f0509f253cd2c1f18c600c1942e63fcbd] ([b129546](https://github.com/idbi/goproto/commit/b129546a204941d1682c34c7c6d89a7d38875ace))
+
 ## [0.0.8](https://github.com/idbi/goproto/compare/v0.0.7...v0.0.8) (2024-01-08)
 
 
