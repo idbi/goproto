@@ -350,9 +350,9 @@ func (m *RegisterIntegrationRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if err := m._validateUuid(m.GetIntegrationId()); err != nil {
+	if err := m._validateUuid(m.GetTypeId()); err != nil {
 		err = RegisterIntegrationRequestValidationError{
-			field:  "IntegrationId",
+			field:  "TypeId",
 			reason: "value must be a valid UUID",
 			cause:  err,
 		}

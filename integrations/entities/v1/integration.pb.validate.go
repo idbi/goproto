@@ -87,6 +87,17 @@ func (m *Integration) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if l := utf8.RuneCountInString(m.GetDescription()); l < 1 || l > 255 {
+		err := IntegrationValidationError{
+			field:  "Description",
+			reason: "value length must be between 1 and 255 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if all {
 		switch v := interface{}(m.GetOwner()).(type) {
 		case interface{ ValidateAll() error }:
@@ -229,6 +240,181 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = IntegrationValidationError{}
+
+// Validate checks the field values on IntegrationType with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *IntegrationType) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on IntegrationType with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// IntegrationTypeMultiError, or nil if none found.
+func (m *IntegrationType) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *IntegrationType) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetId() != "" {
+
+		if err := m._validateUuid(m.GetId()); err != nil {
+			err = IntegrationTypeValidationError{
+				field:  "Id",
+				reason: "value must be a valid UUID",
+				cause:  err,
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
+
+	if l := utf8.RuneCountInString(m.GetName()); l < 1 || l > 255 {
+		err := IntegrationTypeValidationError{
+			field:  "Name",
+			reason: "value length must be between 1 and 255 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if l := utf8.RuneCountInString(m.GetDescription()); l < 1 || l > 255 {
+		err := IntegrationTypeValidationError{
+			field:  "Description",
+			reason: "value length must be between 1 and 255 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, IntegrationTypeValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, IntegrationTypeValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return IntegrationTypeValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return IntegrationTypeMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *IntegrationType) _validateUuid(uuid string) error {
+	if matched := _integration_uuidPattern.MatchString(uuid); !matched {
+		return errors.New("invalid uuid format")
+	}
+
+	return nil
+}
+
+// IntegrationTypeMultiError is an error wrapping multiple validation errors
+// returned by IntegrationType.ValidateAll() if the designated constraints
+// aren't met.
+type IntegrationTypeMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m IntegrationTypeMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m IntegrationTypeMultiError) AllErrors() []error { return m }
+
+// IntegrationTypeValidationError is the validation error returned by
+// IntegrationType.Validate if the designated constraints aren't met.
+type IntegrationTypeValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e IntegrationTypeValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e IntegrationTypeValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e IntegrationTypeValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e IntegrationTypeValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e IntegrationTypeValidationError) ErrorName() string { return "IntegrationTypeValidationError" }
+
+// Error satisfies the builtin error interface
+func (e IntegrationTypeValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sIntegrationType.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = IntegrationTypeValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = IntegrationTypeValidationError{}
 
 // Validate checks the field values on Property with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
