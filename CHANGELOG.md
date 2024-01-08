@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.7](https://github.com/idbi/goproto/compare/v0.0.6...v0.0.7) (2024-01-08)
+
+
+### Bug Fixes
+
+* remove unnecessary owner on task [idbi/proto-apis@27c75f5c7b1476bebf133a6760f247993a388cd6] ([a8d412a](https://github.com/idbi/goproto/commit/a8d412a6fdf537327f9056a167ea4a899f985e56))
+
 ## [0.0.6](https://github.com/idbi/goproto/compare/v0.0.5...v0.0.6) (2024-01-07)
 
 
