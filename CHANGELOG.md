@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.10](https://github.com/idbi/goproto/compare/v0.0.9...v0.0.10) (2024-01-11)
+
+
+### Bug Fixes
+
+* use new explicit defined propery type [idbi/proto-apis@640a2b605e5d1e92a5037c8fe63b0da49fb1589f] ([c5de7ab](https://github.com/idbi/goproto/commit/c5de7ab76a9bd1380e30635c2f0bc392385756f5))
+
 ## [0.0.9](https://github.com/idbi/goproto/compare/v0.0.8...v0.0.9) (2024-01-08)
 
 
