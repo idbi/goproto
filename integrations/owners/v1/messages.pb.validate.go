@@ -60,6 +60,22 @@ func (m *CreateOwnerRequest) validate(all bool) error {
 
 	var errors []error
 
+	if m.GetId() != "" {
+
+		if err := m._validateUuid(m.GetId()); err != nil {
+			err = CreateOwnerRequestValidationError{
+				field:  "Id",
+				reason: "value must be a valid UUID",
+				cause:  err,
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
+
 	if l := utf8.RuneCountInString(m.GetName()); l < 1 || l > 255 {
 		err := CreateOwnerRequestValidationError{
 			field:  "Name",
@@ -73,6 +89,14 @@ func (m *CreateOwnerRequest) validate(all bool) error {
 
 	if len(errors) > 0 {
 		return CreateOwnerRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *CreateOwnerRequest) _validateUuid(uuid string) error {
+	if matched := _messages_uuidPattern.MatchString(uuid); !matched {
+		return errors.New("invalid uuid format")
 	}
 
 	return nil
