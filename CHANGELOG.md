@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/idbi/goproto/compare/v0.1.0...v0.1.1) (2024-01-15)
+
+
+### Bug Fixes
+
+* allow to specify owner id [idbi/proto-apis@7943bfdd8e5503145f51738cdc7248e3880e0cbc] ([8209538](https://github.com/idbi/goproto/commit/8209538dd1d084681a5b854e77fcd7ba26ff659d))
+
 ## [0.1.0](https://github.com/idbi/goproto/compare/v0.0.10...v0.1.0) (2024-01-15)
 
 
