@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.0](https://github.com/idbi/goproto/compare/v0.0.10...v0.1.0) (2024-01-15)
+
+
+### Features
+
+* add get owner to check if exists [idbi/proto-apis@c4b7cb46ab43461dddb067cfcc5f58028ccaf902] ([93750e9](https://github.com/idbi/goproto/commit/93750e92d43f956edc6ff29f3faccd55f0287f0a))
+
 ## [0.0.10](https://github.com/idbi/goproto/compare/v0.0.9...v0.0.10) (2024-01-11)
 
 
