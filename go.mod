@@ -4,7 +4,7 @@ go 1.21.5
 
 require (
 	github.com/bufbuild/buf v1.28.1
-	github.com/envoyproxy/protoc-gen-validate v1.0.2
+	github.com/envoyproxy/protoc-gen-validate v1.0.3
 	golang.org/x/tools v0.16.1
 	google.golang.org/genproto/googleapis/api v0.0.0-20231212172506-995d672761c0
 	google.golang.org/grpc v1.60.1
@@ -76,7 +76,6 @@ require (
 	go.uber.org/zap v1.26.0 // indirect
 	golang.org/x/crypto v0.17.0 // indirect
 	golang.org/x/exp v0.0.0-20231226003508-02704c960a9b // indirect
-	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/mod v0.14.0 // indirect
 	golang.org/x/net v0.19.0 // indirect
 	golang.org/x/sync v0.5.0 // indirect
