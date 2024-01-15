@@ -60,20 +60,16 @@ func (m *CreateTaskRequest) validate(all bool) error {
 
 	var errors []error
 
-	if m.GetIntegrationId() != "" {
-
-		if err := m._validateUuid(m.GetIntegrationId()); err != nil {
-			err = CreateTaskRequestValidationError{
-				field:  "IntegrationId",
-				reason: "value must be a valid UUID",
-				cause:  err,
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
+	if err := m._validateUuid(m.GetIntegrationId()); err != nil {
+		err = CreateTaskRequestValidationError{
+			field:  "IntegrationId",
+			reason: "value must be a valid UUID",
+			cause:  err,
 		}
-
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
 	}
 
 	for idx, item := range m.GetProperties() {
@@ -358,6 +354,330 @@ var _ interface {
 	ErrorName() string
 } = CreateTaskResponseValidationError{}
 
+// Validate checks the field values on GetTasksRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetTasksRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetTasksRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetTasksRequestMultiError, or nil if none found.
+func (m *GetTasksRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetTasksRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if err := m._validateUuid(m.GetIntegrationId()); err != nil {
+		err = GetTasksRequestValidationError{
+			field:  "IntegrationId",
+			reason: "value must be a valid UUID",
+			cause:  err,
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if val := m.GetPageSize(); val < 15 || val > 100 {
+		err := GetTasksRequestValidationError{
+			field:  "PageSize",
+			reason: "value must be inside range [15, 100]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetPageToken() != "" {
+
+		if l := utf8.RuneCountInString(m.GetPageToken()); l < 1 || l > 255 {
+			err := GetTasksRequestValidationError{
+				field:  "PageToken",
+				reason: "value length must be between 1 and 255 runes, inclusive",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetTasksRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *GetTasksRequest) _validateUuid(uuid string) error {
+	if matched := _messages_uuidPattern.MatchString(uuid); !matched {
+		return errors.New("invalid uuid format")
+	}
+
+	return nil
+}
+
+// GetTasksRequestMultiError is an error wrapping multiple validation errors
+// returned by GetTasksRequest.ValidateAll() if the designated constraints
+// aren't met.
+type GetTasksRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetTasksRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetTasksRequestMultiError) AllErrors() []error { return m }
+
+// GetTasksRequestValidationError is the validation error returned by
+// GetTasksRequest.Validate if the designated constraints aren't met.
+type GetTasksRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTasksRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetTasksRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetTasksRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetTasksRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetTasksRequestValidationError) ErrorName() string { return "GetTasksRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e GetTasksRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTasksRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTasksRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTasksRequestValidationError{}
+
+// Validate checks the field values on GetTasksResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetTasksResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetTasksResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetTasksResponseMultiError, or nil if none found.
+func (m *GetTasksResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetTasksResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetResult()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTasksResponseValidationError{
+					field:  "Result",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTasksResponseValidationError{
+					field:  "Result",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetResult()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTasksResponseValidationError{
+				field:  "Result",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	for idx, item := range m.GetTasks() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetTasksResponseValidationError{
+						field:  fmt.Sprintf("Tasks[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetTasksResponseValidationError{
+						field:  fmt.Sprintf("Tasks[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetTasksResponseValidationError{
+					field:  fmt.Sprintf("Tasks[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.GetNextPageToken() != "" {
+
+		if l := utf8.RuneCountInString(m.GetNextPageToken()); l < 1 || l > 255 {
+			err := GetTasksResponseValidationError{
+				field:  "NextPageToken",
+				reason: "value length must be between 1 and 255 runes, inclusive",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetTasksResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetTasksResponseMultiError is an error wrapping multiple validation errors
+// returned by GetTasksResponse.ValidateAll() if the designated constraints
+// aren't met.
+type GetTasksResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetTasksResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetTasksResponseMultiError) AllErrors() []error { return m }
+
+// GetTasksResponseValidationError is the validation error returned by
+// GetTasksResponse.Validate if the designated constraints aren't met.
+type GetTasksResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTasksResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetTasksResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetTasksResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetTasksResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetTasksResponseValidationError) ErrorName() string { return "GetTasksResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e GetTasksResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTasksResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTasksResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTasksResponseValidationError{}
+
 // Validate checks the field values on GetTaskRequest with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -380,20 +700,16 @@ func (m *GetTaskRequest) validate(all bool) error {
 
 	var errors []error
 
-	if m.GetId() != "" {
-
-		if err := m._validateUuid(m.GetId()); err != nil {
-			err = GetTaskRequestValidationError{
-				field:  "Id",
-				reason: "value must be a valid UUID",
-				cause:  err,
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
+	if err := m._validateUuid(m.GetId()); err != nil {
+		err = GetTaskRequestValidationError{
+			field:  "Id",
+			reason: "value must be a valid UUID",
+			cause:  err,
 		}
-
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
 	}
 
 	if len(errors) > 0 {
@@ -696,20 +1012,16 @@ func (m *GetTaskStatusRequest) validate(all bool) error {
 
 	var errors []error
 
-	if m.GetId() != "" {
-
-		if err := m._validateUuid(m.GetId()); err != nil {
-			err = GetTaskStatusRequestValidationError{
-				field:  "Id",
-				reason: "value must be a valid UUID",
-				cause:  err,
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
+	if err := m._validateUuid(m.GetId()); err != nil {
+		err = GetTaskStatusRequestValidationError{
+			field:  "Id",
+			reason: "value must be a valid UUID",
+			cause:  err,
 		}
-
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
 	}
 
 	if len(errors) > 0 {
@@ -1016,20 +1328,16 @@ func (m *GetTaskResultRequest) validate(all bool) error {
 
 	var errors []error
 
-	if m.GetId() != "" {
-
-		if err := m._validateUuid(m.GetId()); err != nil {
-			err = GetTaskResultRequestValidationError{
-				field:  "Id",
-				reason: "value must be a valid UUID",
-				cause:  err,
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
+	if err := m._validateUuid(m.GetId()); err != nil {
+		err = GetTaskResultRequestValidationError{
+			field:  "Id",
+			reason: "value must be a valid UUID",
+			cause:  err,
 		}
-
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
 	}
 
 	if len(errors) > 0 {
