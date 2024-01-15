@@ -60,10 +60,11 @@ func (m *GetIntegrationsRequest) validate(all bool) error {
 
 	var errors []error
 
-	if l := utf8.RuneCountInString(m.GetOwnerId()); l < 1 || l > 255 {
-		err := GetIntegrationsRequestValidationError{
+	if err := m._validateUuid(m.GetOwnerId()); err != nil {
+		err = GetIntegrationsRequestValidationError{
 			field:  "OwnerId",
-			reason: "value length must be between 1 and 255 runes, inclusive",
+			reason: "value must be a valid UUID",
+			cause:  err,
 		}
 		if !all {
 			return err
@@ -73,6 +74,14 @@ func (m *GetIntegrationsRequest) validate(all bool) error {
 
 	if len(errors) > 0 {
 		return GetIntegrationsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *GetIntegrationsRequest) _validateUuid(uuid string) error {
+	if matched := _messages_uuidPattern.MatchString(uuid); !matched {
+		return errors.New("invalid uuid format")
 	}
 
 	return nil
@@ -1259,20 +1268,16 @@ func (m *RemoveIntegrationPropertiesRequest) validate(all bool) error {
 			_RemoveIntegrationPropertiesRequest_PropertyIds_Unique[item] = struct{}{}
 		}
 
-		if item != "" {
-
-			if err := m._validateUuid(item); err != nil {
-				err = RemoveIntegrationPropertiesRequestValidationError{
-					field:  fmt.Sprintf("PropertyIds[%v]", idx),
-					reason: "value must be a valid UUID",
-					cause:  err,
-				}
-				if !all {
-					return err
-				}
-				errors = append(errors, err)
+		if err := m._validateUuid(item); err != nil {
+			err = RemoveIntegrationPropertiesRequestValidationError{
+				field:  fmt.Sprintf("PropertyIds[%v]", idx),
+				reason: "value must be a valid UUID",
+				cause:  err,
 			}
-
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
 		}
 
 	}
