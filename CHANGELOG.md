@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/idbi/goproto/compare/v0.1.1...v0.1.2) (2024-01-16)
+
+
+### Bug Fixes
+
+* add new properties to ui [idbi/proto-apis@677ea98651eb86dfc28ae79fe0a38cd608a39acf] ([e0c8767](https://github.com/idbi/goproto/commit/e0c8767912f62bfbedb1139363f841e6bf9d82d6))
+
 ## [0.1.1](https://github.com/idbi/goproto/compare/v0.1.0...v0.1.1) (2024-01-15)
 
 
