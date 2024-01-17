@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/idbi/goproto/compare/v0.1.5...v0.1.6) (2024-01-17)
+
+
+### Bug Fixes
+
+* add retries field to response [idbi/proto-apis@8cbceb84797fdc415bdb0308f3525509ca313bea] ([690b117](https://github.com/idbi/goproto/commit/690b117c03d6befdacf1b07c3e9d340deb06dfc8))
+
 ## [0.1.5](https://github.com/idbi/goproto/compare/v0.1.4...v0.1.5) (2024-01-17)
 
 
