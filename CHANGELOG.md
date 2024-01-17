@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/idbi/goproto/compare/v0.1.2...v0.1.3) (2024-01-17)
+
+
+### Bug Fixes
+
+* add update property. this allows to update and not remove and add again [idbi/proto-apis@d21248adb490f56b42fc753f7b683eb213bbcfb8] ([a279932](https://github.com/idbi/goproto/commit/a279932ca46a5f1edbb2a4f0dcf26f0da1ac2d72))
+
 ## [0.1.2](https://github.com/idbi/goproto/compare/v0.1.1...v0.1.2) (2024-01-16)
 
 
