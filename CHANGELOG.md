@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/idbi/goproto/compare/v0.1.3...v0.1.4) (2024-01-17)
+
+
+### Bug Fixes
+
+* parameter count [idbi/proto-apis@082714e87d9b6f3aae0234519500f377ba6ae052] ([468bb32](https://github.com/idbi/goproto/commit/468bb32ef889260d8aea1b216ef32a1653f45fad))
+
 ## [0.1.3](https://github.com/idbi/goproto/compare/v0.1.2...v0.1.3) (2024-01-17)
 
 
