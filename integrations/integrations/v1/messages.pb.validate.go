@@ -1527,47 +1527,16 @@ func (m *RemoveIntegrationPropertyRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if l := len(m.GetPropertyIds()); l < 1 || l > 100 {
-		err := RemoveIntegrationPropertyRequestValidationError{
+	if err := m._validateUuid(m.GetPropertyIds()); err != nil {
+		err = RemoveIntegrationPropertyRequestValidationError{
 			field:  "PropertyIds",
-			reason: "value must contain between 1 and 100 items, inclusive",
+			reason: "value must be a valid UUID",
+			cause:  err,
 		}
 		if !all {
 			return err
 		}
 		errors = append(errors, err)
-	}
-
-	_RemoveIntegrationPropertyRequest_PropertyIds_Unique := make(map[string]struct{}, len(m.GetPropertyIds()))
-
-	for idx, item := range m.GetPropertyIds() {
-		_, _ = idx, item
-
-		if _, exists := _RemoveIntegrationPropertyRequest_PropertyIds_Unique[item]; exists {
-			err := RemoveIntegrationPropertyRequestValidationError{
-				field:  fmt.Sprintf("PropertyIds[%v]", idx),
-				reason: "repeated value must contain unique items",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		} else {
-			_RemoveIntegrationPropertyRequest_PropertyIds_Unique[item] = struct{}{}
-		}
-
-		if err := m._validateUuid(item); err != nil {
-			err = RemoveIntegrationPropertyRequestValidationError{
-				field:  fmt.Sprintf("PropertyIds[%v]", idx),
-				reason: "value must be a valid UUID",
-				cause:  err,
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-
 	}
 
 	if len(errors) > 0 {
