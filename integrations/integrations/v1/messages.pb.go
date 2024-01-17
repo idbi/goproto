@@ -442,17 +442,17 @@ func (x *GetIntegrationPropertiesResponse) GetProperties() []*v1.IntegrationProp
 	return nil
 }
 
-type RemoveIntegrationPropertiesRequest struct {
+type UpdateIntegrationPropertyRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	IntegrationId string   `protobuf:"bytes,1,opt,name=integration_id,json=integrationId,proto3" json:"integration_id,omitempty"`
-	PropertyIds   []string `protobuf:"bytes,2,rep,name=property_ids,json=propertyIds,proto3" json:"property_ids,omitempty"`
+	IntegrationId string                  `protobuf:"bytes,1,opt,name=integration_id,json=integrationId,proto3" json:"integration_id,omitempty"`
+	Property      *v1.IntegrationProperty `protobuf:"bytes,2,opt,name=property,proto3" json:"property,omitempty"`
 }
 
-func (x *RemoveIntegrationPropertiesRequest) Reset() {
-	*x = RemoveIntegrationPropertiesRequest{}
+func (x *UpdateIntegrationPropertyRequest) Reset() {
+	*x = UpdateIntegrationPropertyRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_integrations_integrations_v1_messages_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -460,13 +460,13 @@ func (x *RemoveIntegrationPropertiesRequest) Reset() {
 	}
 }
 
-func (x *RemoveIntegrationPropertiesRequest) String() string {
+func (x *UpdateIntegrationPropertyRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RemoveIntegrationPropertiesRequest) ProtoMessage() {}
+func (*UpdateIntegrationPropertyRequest) ProtoMessage() {}
 
-func (x *RemoveIntegrationPropertiesRequest) ProtoReflect() protoreflect.Message {
+func (x *UpdateIntegrationPropertyRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_integrations_integrations_v1_messages_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -478,26 +478,26 @@ func (x *RemoveIntegrationPropertiesRequest) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RemoveIntegrationPropertiesRequest.ProtoReflect.Descriptor instead.
-func (*RemoveIntegrationPropertiesRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateIntegrationPropertyRequest.ProtoReflect.Descriptor instead.
+func (*UpdateIntegrationPropertyRequest) Descriptor() ([]byte, []int) {
 	return file_integrations_integrations_v1_messages_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *RemoveIntegrationPropertiesRequest) GetIntegrationId() string {
+func (x *UpdateIntegrationPropertyRequest) GetIntegrationId() string {
 	if x != nil {
 		return x.IntegrationId
 	}
 	return ""
 }
 
-func (x *RemoveIntegrationPropertiesRequest) GetPropertyIds() []string {
+func (x *UpdateIntegrationPropertyRequest) GetProperty() *v1.IntegrationProperty {
 	if x != nil {
-		return x.PropertyIds
+		return x.Property
 	}
 	return nil
 }
 
-type RemoveIntegrationPropertiesResponse struct {
+type UpdateIntegrationPropertyResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -505,8 +505,8 @@ type RemoveIntegrationPropertiesResponse struct {
 	Result *v1.Result `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
 }
 
-func (x *RemoveIntegrationPropertiesResponse) Reset() {
-	*x = RemoveIntegrationPropertiesResponse{}
+func (x *UpdateIntegrationPropertyResponse) Reset() {
+	*x = UpdateIntegrationPropertyResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_integrations_integrations_v1_messages_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -514,13 +514,13 @@ func (x *RemoveIntegrationPropertiesResponse) Reset() {
 	}
 }
 
-func (x *RemoveIntegrationPropertiesResponse) String() string {
+func (x *UpdateIntegrationPropertyResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RemoveIntegrationPropertiesResponse) ProtoMessage() {}
+func (*UpdateIntegrationPropertyResponse) ProtoMessage() {}
 
-func (x *RemoveIntegrationPropertiesResponse) ProtoReflect() protoreflect.Message {
+func (x *UpdateIntegrationPropertyResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_integrations_integrations_v1_messages_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -532,12 +532,114 @@ func (x *RemoveIntegrationPropertiesResponse) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RemoveIntegrationPropertiesResponse.ProtoReflect.Descriptor instead.
-func (*RemoveIntegrationPropertiesResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateIntegrationPropertyResponse.ProtoReflect.Descriptor instead.
+func (*UpdateIntegrationPropertyResponse) Descriptor() ([]byte, []int) {
 	return file_integrations_integrations_v1_messages_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *RemoveIntegrationPropertiesResponse) GetResult() *v1.Result {
+func (x *UpdateIntegrationPropertyResponse) GetResult() *v1.Result {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
+type RemoveIntegrationPropertyRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	IntegrationId string   `protobuf:"bytes,1,opt,name=integration_id,json=integrationId,proto3" json:"integration_id,omitempty"`
+	PropertyIds   []string `protobuf:"bytes,2,rep,name=property_ids,json=propertyIds,proto3" json:"property_ids,omitempty"`
+}
+
+func (x *RemoveIntegrationPropertyRequest) Reset() {
+	*x = RemoveIntegrationPropertyRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_integrations_integrations_v1_messages_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RemoveIntegrationPropertyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveIntegrationPropertyRequest) ProtoMessage() {}
+
+func (x *RemoveIntegrationPropertyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_integrations_integrations_v1_messages_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveIntegrationPropertyRequest.ProtoReflect.Descriptor instead.
+func (*RemoveIntegrationPropertyRequest) Descriptor() ([]byte, []int) {
+	return file_integrations_integrations_v1_messages_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *RemoveIntegrationPropertyRequest) GetIntegrationId() string {
+	if x != nil {
+		return x.IntegrationId
+	}
+	return ""
+}
+
+func (x *RemoveIntegrationPropertyRequest) GetPropertyIds() []string {
+	if x != nil {
+		return x.PropertyIds
+	}
+	return nil
+}
+
+type RemoveIntegrationPropertyResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Result *v1.Result `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+}
+
+func (x *RemoveIntegrationPropertyResponse) Reset() {
+	*x = RemoveIntegrationPropertyResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_integrations_integrations_v1_messages_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RemoveIntegrationPropertyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveIntegrationPropertyResponse) ProtoMessage() {}
+
+func (x *RemoveIntegrationPropertyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_integrations_integrations_v1_messages_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveIntegrationPropertyResponse.ProtoReflect.Descriptor instead.
+func (*RemoveIntegrationPropertyResponse) Descriptor() ([]byte, []int) {
+	return file_integrations_integrations_v1_messages_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *RemoveIntegrationPropertyResponse) GetResult() *v1.Result {
 	if x != nil {
 		return x.Result
 	}
@@ -634,32 +736,48 @@ var file_integrations_integrations_v1_messages_proto_rawDesc = []byte{
 	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x69, 0x65, 0x73, 0x2e, 0x76,
 	0x31, 0x2e, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x6f,
 	0x70, 0x65, 0x72, 0x74, 0x79, 0x52, 0x0a, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x69, 0x65,
-	0x73, 0x22, 0x8d, 0x01, 0x0a, 0x22, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x49, 0x6e, 0x74, 0x65,
-	0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x69, 0x65,
-	0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2f, 0x0a, 0x0e, 0x69, 0x6e, 0x74, 0x65,
-	0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x42, 0x08, 0xfa, 0x42, 0x05, 0x72, 0x03, 0xb0, 0x01, 0x01, 0x52, 0x0d, 0x69, 0x6e, 0x74, 0x65,
-	0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x36, 0x0a, 0x0c, 0x70, 0x72, 0x6f,
-	0x70, 0x65, 0x72, 0x74, 0x79, 0x5f, 0x69, 0x64, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x42,
-	0x13, 0xfa, 0x42, 0x10, 0x92, 0x01, 0x0d, 0x08, 0x01, 0x10, 0x64, 0x18, 0x01, 0x22, 0x05, 0x72,
-	0x03, 0xb0, 0x01, 0x01, 0x52, 0x0b, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64,
-	0x73, 0x22, 0x5f, 0x0a, 0x23, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x49, 0x6e, 0x74, 0x65, 0x67,
-	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x69, 0x65, 0x73,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x38, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75,
-	0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x69, 0x6e, 0x74, 0x65, 0x67,
-	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x69, 0x65, 0x73,
-	0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75,
-	0x6c, 0x74, 0x42, 0x9c, 0x01, 0x5a, 0x37, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
-	0x6d, 0x2f, 0x69, 0x64, 0x62, 0x69, 0x2f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x69,
-	0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2f, 0x69, 0x6e, 0x74, 0x65,
-	0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2f, 0x76, 0x31, 0x3b, 0x76, 0x31, 0xca, 0x02,
-	0x2a, 0x49, 0x44, 0x42, 0x49, 0x5c, 0x50, 0x48, 0x50, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x5c, 0x49,
-	0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x5c, 0x49, 0x6e, 0x74, 0x65,
-	0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x5c, 0x76, 0x31, 0xe2, 0x02, 0x33, 0x49, 0x44,
-	0x42, 0x49, 0x5c, 0x50, 0x48, 0x50, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x5c, 0x49, 0x6e, 0x74, 0x65,
-	0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x5c, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x5c, 0x76, 0x31, 0x5c, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
-	0x61, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x22, 0x9e, 0x01, 0x0a, 0x20, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x49, 0x6e, 0x74, 0x65,
+	0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2f, 0x0a, 0x0e, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x72,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x08,
+	0xfa, 0x42, 0x05, 0x72, 0x03, 0xb0, 0x01, 0x01, 0x52, 0x0d, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x72,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x49, 0x0a, 0x08, 0x70, 0x72, 0x6f, 0x70, 0x65,
+	0x72, 0x74, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2d, 0x2e, 0x69, 0x6e, 0x74, 0x65,
+	0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x69, 0x65,
+	0x73, 0x2e, 0x76, 0x31, 0x2e, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x52, 0x08, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72,
+	0x74, 0x79, 0x22, 0x5d, 0x0a, 0x21, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x49, 0x6e, 0x74, 0x65,
+	0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x38, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c,
+	0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x72,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x69, 0x65, 0x73, 0x2e,
+	0x76, 0x31, 0x2e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c,
+	0x74, 0x22, 0x8b, 0x01, 0x0a, 0x20, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x49, 0x6e, 0x74, 0x65,
+	0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2f, 0x0a, 0x0e, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x72,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x08,
+	0xfa, 0x42, 0x05, 0x72, 0x03, 0xb0, 0x01, 0x01, 0x52, 0x0d, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x72,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x36, 0x0a, 0x0c, 0x70, 0x72, 0x6f, 0x70, 0x65,
+	0x72, 0x74, 0x79, 0x5f, 0x69, 0x64, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x42, 0x13, 0xfa,
+	0x42, 0x10, 0x92, 0x01, 0x0d, 0x08, 0x01, 0x10, 0x64, 0x18, 0x01, 0x22, 0x05, 0x72, 0x03, 0xb0,
+	0x01, 0x01, 0x52, 0x0b, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x73, 0x22,
+	0x5d, 0x0a, 0x21, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x38, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x73, 0x2e, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x69, 0x65, 0x73, 0x2e, 0x76, 0x31, 0x2e,
+	0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x42, 0x9c,
+	0x01, 0x5a, 0x37, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x64,
+	0x62, 0x69, 0x2f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x69, 0x6e, 0x74, 0x65, 0x67,
+	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2f, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x73, 0x2f, 0x76, 0x31, 0x3b, 0x76, 0x31, 0xca, 0x02, 0x2a, 0x49, 0x44, 0x42,
+	0x49, 0x5c, 0x50, 0x48, 0x50, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x5c, 0x49, 0x6e, 0x74, 0x65, 0x67,
+	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x5c, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x73, 0x5c, 0x76, 0x31, 0xe2, 0x02, 0x33, 0x49, 0x44, 0x42, 0x49, 0x5c, 0x50,
+	0x48, 0x50, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x5c, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x73, 0x5c, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x73, 0x5c, 0x76, 0x31, 0x5c, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -674,7 +792,7 @@ func file_integrations_integrations_v1_messages_proto_rawDescGZIP() []byte {
 	return file_integrations_integrations_v1_messages_proto_rawDescData
 }
 
-var file_integrations_integrations_v1_messages_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_integrations_integrations_v1_messages_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_integrations_integrations_v1_messages_proto_goTypes = []interface{}{
 	(*GetIntegrationsRequest)(nil),                // 0: integrations.integrations.v1.GetIntegrationsRequest
 	(*GetIntegrationsResponse)(nil),               // 1: integrations.integrations.v1.GetIntegrationsResponse
@@ -684,27 +802,31 @@ var file_integrations_integrations_v1_messages_proto_goTypes = []interface{}{
 	(*RegisterIntegrationPropertiesResponse)(nil), // 5: integrations.integrations.v1.RegisterIntegrationPropertiesResponse
 	(*GetIntegrationPropertiesRequest)(nil),       // 6: integrations.integrations.v1.GetIntegrationPropertiesRequest
 	(*GetIntegrationPropertiesResponse)(nil),      // 7: integrations.integrations.v1.GetIntegrationPropertiesResponse
-	(*RemoveIntegrationPropertiesRequest)(nil),    // 8: integrations.integrations.v1.RemoveIntegrationPropertiesRequest
-	(*RemoveIntegrationPropertiesResponse)(nil),   // 9: integrations.integrations.v1.RemoveIntegrationPropertiesResponse
-	(*v1.Result)(nil),                             // 10: integrations.entities.v1.Result
-	(*v1.Integration)(nil),                        // 11: integrations.entities.v1.Integration
-	(*v1.IntegrationProperty)(nil),                // 12: integrations.entities.v1.IntegrationProperty
+	(*UpdateIntegrationPropertyRequest)(nil),      // 8: integrations.integrations.v1.UpdateIntegrationPropertyRequest
+	(*UpdateIntegrationPropertyResponse)(nil),     // 9: integrations.integrations.v1.UpdateIntegrationPropertyResponse
+	(*RemoveIntegrationPropertyRequest)(nil),      // 10: integrations.integrations.v1.RemoveIntegrationPropertyRequest
+	(*RemoveIntegrationPropertyResponse)(nil),     // 11: integrations.integrations.v1.RemoveIntegrationPropertyResponse
+	(*v1.Result)(nil),                             // 12: integrations.entities.v1.Result
+	(*v1.Integration)(nil),                        // 13: integrations.entities.v1.Integration
+	(*v1.IntegrationProperty)(nil),                // 14: integrations.entities.v1.IntegrationProperty
 }
 var file_integrations_integrations_v1_messages_proto_depIdxs = []int32{
-	10, // 0: integrations.integrations.v1.GetIntegrationsResponse.result:type_name -> integrations.entities.v1.Result
-	11, // 1: integrations.integrations.v1.GetIntegrationsResponse.integrations:type_name -> integrations.entities.v1.Integration
-	10, // 2: integrations.integrations.v1.RegisterIntegrationResponse.result:type_name -> integrations.entities.v1.Result
-	11, // 3: integrations.integrations.v1.RegisterIntegrationResponse.integration:type_name -> integrations.entities.v1.Integration
-	12, // 4: integrations.integrations.v1.RegisterIntegrationPropertiesRequest.properties:type_name -> integrations.entities.v1.IntegrationProperty
-	10, // 5: integrations.integrations.v1.RegisterIntegrationPropertiesResponse.result:type_name -> integrations.entities.v1.Result
-	10, // 6: integrations.integrations.v1.GetIntegrationPropertiesResponse.result:type_name -> integrations.entities.v1.Result
-	12, // 7: integrations.integrations.v1.GetIntegrationPropertiesResponse.properties:type_name -> integrations.entities.v1.IntegrationProperty
-	10, // 8: integrations.integrations.v1.RemoveIntegrationPropertiesResponse.result:type_name -> integrations.entities.v1.Result
-	9,  // [9:9] is the sub-list for method output_type
-	9,  // [9:9] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	12, // 0: integrations.integrations.v1.GetIntegrationsResponse.result:type_name -> integrations.entities.v1.Result
+	13, // 1: integrations.integrations.v1.GetIntegrationsResponse.integrations:type_name -> integrations.entities.v1.Integration
+	12, // 2: integrations.integrations.v1.RegisterIntegrationResponse.result:type_name -> integrations.entities.v1.Result
+	13, // 3: integrations.integrations.v1.RegisterIntegrationResponse.integration:type_name -> integrations.entities.v1.Integration
+	14, // 4: integrations.integrations.v1.RegisterIntegrationPropertiesRequest.properties:type_name -> integrations.entities.v1.IntegrationProperty
+	12, // 5: integrations.integrations.v1.RegisterIntegrationPropertiesResponse.result:type_name -> integrations.entities.v1.Result
+	12, // 6: integrations.integrations.v1.GetIntegrationPropertiesResponse.result:type_name -> integrations.entities.v1.Result
+	14, // 7: integrations.integrations.v1.GetIntegrationPropertiesResponse.properties:type_name -> integrations.entities.v1.IntegrationProperty
+	14, // 8: integrations.integrations.v1.UpdateIntegrationPropertyRequest.property:type_name -> integrations.entities.v1.IntegrationProperty
+	12, // 9: integrations.integrations.v1.UpdateIntegrationPropertyResponse.result:type_name -> integrations.entities.v1.Result
+	12, // 10: integrations.integrations.v1.RemoveIntegrationPropertyResponse.result:type_name -> integrations.entities.v1.Result
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_integrations_integrations_v1_messages_proto_init() }
@@ -810,7 +932,7 @@ func file_integrations_integrations_v1_messages_proto_init() {
 			}
 		}
 		file_integrations_integrations_v1_messages_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RemoveIntegrationPropertiesRequest); i {
+			switch v := v.(*UpdateIntegrationPropertyRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -822,7 +944,31 @@ func file_integrations_integrations_v1_messages_proto_init() {
 			}
 		}
 		file_integrations_integrations_v1_messages_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RemoveIntegrationPropertiesResponse); i {
+			switch v := v.(*UpdateIntegrationPropertyResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_integrations_integrations_v1_messages_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RemoveIntegrationPropertyRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_integrations_integrations_v1_messages_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RemoveIntegrationPropertyResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -840,7 +986,7 @@ func file_integrations_integrations_v1_messages_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_integrations_integrations_v1_messages_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
