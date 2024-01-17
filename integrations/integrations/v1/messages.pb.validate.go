@@ -1527,9 +1527,9 @@ func (m *RemoveIntegrationPropertyRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if err := m._validateUuid(m.GetPropertyIds()); err != nil {
+	if err := m._validateUuid(m.GetPropertyId()); err != nil {
 		err = RemoveIntegrationPropertyRequestValidationError{
-			field:  "PropertyIds",
+			field:  "PropertyId",
 			reason: "value must be a valid UUID",
 			cause:  err,
 		}
