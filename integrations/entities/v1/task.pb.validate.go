@@ -86,6 +86,8 @@ func (m *Task) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	// no validation rules for Retries
+
 	if all {
 		switch v := interface{}(m.GetStatus()).(type) {
 		case interface{ ValidateAll() error }:
