@@ -23,7 +23,8 @@ const (
 	Service_RegisterIntegration_FullMethodName           = "/integrations.integrations.v1.Service/RegisterIntegration"
 	Service_RegisterIntegrationProperties_FullMethodName = "/integrations.integrations.v1.Service/RegisterIntegrationProperties"
 	Service_GetIntegrationProperties_FullMethodName      = "/integrations.integrations.v1.Service/GetIntegrationProperties"
-	Service_RemoveIntegrationProperties_FullMethodName   = "/integrations.integrations.v1.Service/RemoveIntegrationProperties"
+	Service_UpdateIntegrationProperty_FullMethodName     = "/integrations.integrations.v1.Service/UpdateIntegrationProperty"
+	Service_RemoveIntegrationProperty_FullMethodName     = "/integrations.integrations.v1.Service/RemoveIntegrationProperty"
 )
 
 // ServiceClient is the client API for Service service.
@@ -34,7 +35,8 @@ type ServiceClient interface {
 	RegisterIntegration(ctx context.Context, in *RegisterIntegrationRequest, opts ...grpc.CallOption) (*RegisterIntegrationResponse, error)
 	RegisterIntegrationProperties(ctx context.Context, in *RegisterIntegrationPropertiesRequest, opts ...grpc.CallOption) (*RegisterIntegrationPropertiesResponse, error)
 	GetIntegrationProperties(ctx context.Context, in *GetIntegrationPropertiesRequest, opts ...grpc.CallOption) (*GetIntegrationPropertiesResponse, error)
-	RemoveIntegrationProperties(ctx context.Context, in *RemoveIntegrationPropertiesRequest, opts ...grpc.CallOption) (*RemoveIntegrationPropertiesResponse, error)
+	UpdateIntegrationProperty(ctx context.Context, in *UpdateIntegrationPropertyRequest, opts ...grpc.CallOption) (*UpdateIntegrationPropertyResponse, error)
+	RemoveIntegrationProperty(ctx context.Context, in *RemoveIntegrationPropertyRequest, opts ...grpc.CallOption) (*RemoveIntegrationPropertyResponse, error)
 }
 
 type serviceClient struct {
@@ -81,9 +83,18 @@ func (c *serviceClient) GetIntegrationProperties(ctx context.Context, in *GetInt
 	return out, nil
 }
 
-func (c *serviceClient) RemoveIntegrationProperties(ctx context.Context, in *RemoveIntegrationPropertiesRequest, opts ...grpc.CallOption) (*RemoveIntegrationPropertiesResponse, error) {
-	out := new(RemoveIntegrationPropertiesResponse)
-	err := c.cc.Invoke(ctx, Service_RemoveIntegrationProperties_FullMethodName, in, out, opts...)
+func (c *serviceClient) UpdateIntegrationProperty(ctx context.Context, in *UpdateIntegrationPropertyRequest, opts ...grpc.CallOption) (*UpdateIntegrationPropertyResponse, error) {
+	out := new(UpdateIntegrationPropertyResponse)
+	err := c.cc.Invoke(ctx, Service_UpdateIntegrationProperty_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *serviceClient) RemoveIntegrationProperty(ctx context.Context, in *RemoveIntegrationPropertyRequest, opts ...grpc.CallOption) (*RemoveIntegrationPropertyResponse, error) {
+	out := new(RemoveIntegrationPropertyResponse)
+	err := c.cc.Invoke(ctx, Service_RemoveIntegrationProperty_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +109,8 @@ type ServiceServer interface {
 	RegisterIntegration(context.Context, *RegisterIntegrationRequest) (*RegisterIntegrationResponse, error)
 	RegisterIntegrationProperties(context.Context, *RegisterIntegrationPropertiesRequest) (*RegisterIntegrationPropertiesResponse, error)
 	GetIntegrationProperties(context.Context, *GetIntegrationPropertiesRequest) (*GetIntegrationPropertiesResponse, error)
-	RemoveIntegrationProperties(context.Context, *RemoveIntegrationPropertiesRequest) (*RemoveIntegrationPropertiesResponse, error)
+	UpdateIntegrationProperty(context.Context, *UpdateIntegrationPropertyRequest) (*UpdateIntegrationPropertyResponse, error)
+	RemoveIntegrationProperty(context.Context, *RemoveIntegrationPropertyRequest) (*RemoveIntegrationPropertyResponse, error)
 	mustEmbedUnimplementedServiceServer()
 }
 
@@ -118,8 +130,11 @@ func (UnimplementedServiceServer) RegisterIntegrationProperties(context.Context,
 func (UnimplementedServiceServer) GetIntegrationProperties(context.Context, *GetIntegrationPropertiesRequest) (*GetIntegrationPropertiesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetIntegrationProperties not implemented")
 }
-func (UnimplementedServiceServer) RemoveIntegrationProperties(context.Context, *RemoveIntegrationPropertiesRequest) (*RemoveIntegrationPropertiesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RemoveIntegrationProperties not implemented")
+func (UnimplementedServiceServer) UpdateIntegrationProperty(context.Context, *UpdateIntegrationPropertyRequest) (*UpdateIntegrationPropertyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateIntegrationProperty not implemented")
+}
+func (UnimplementedServiceServer) RemoveIntegrationProperty(context.Context, *RemoveIntegrationPropertyRequest) (*RemoveIntegrationPropertyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveIntegrationProperty not implemented")
 }
 func (UnimplementedServiceServer) mustEmbedUnimplementedServiceServer() {}
 
@@ -206,20 +221,38 @@ func _Service_GetIntegrationProperties_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Service_RemoveIntegrationProperties_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RemoveIntegrationPropertiesRequest)
+func _Service_UpdateIntegrationProperty_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateIntegrationPropertyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceServer).RemoveIntegrationProperties(ctx, in)
+		return srv.(ServiceServer).UpdateIntegrationProperty(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Service_RemoveIntegrationProperties_FullMethodName,
+		FullMethod: Service_UpdateIntegrationProperty_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).RemoveIntegrationProperties(ctx, req.(*RemoveIntegrationPropertiesRequest))
+		return srv.(ServiceServer).UpdateIntegrationProperty(ctx, req.(*UpdateIntegrationPropertyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Service_RemoveIntegrationProperty_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveIntegrationPropertyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceServer).RemoveIntegrationProperty(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Service_RemoveIntegrationProperty_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceServer).RemoveIntegrationProperty(ctx, req.(*RemoveIntegrationPropertyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -248,8 +281,12 @@ var Service_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Service_GetIntegrationProperties_Handler,
 		},
 		{
-			MethodName: "RemoveIntegrationProperties",
-			Handler:    _Service_RemoveIntegrationProperties_Handler,
+			MethodName: "UpdateIntegrationProperty",
+			Handler:    _Service_UpdateIntegrationProperty_Handler,
+		},
+		{
+			MethodName: "RemoveIntegrationProperty",
+			Handler:    _Service_RemoveIntegrationProperty_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
