@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.7](https://github.com/idbi/goproto/compare/v0.1.6...v0.1.7) (2024-01-19)
+
+
+### Bug Fixes
+
+* validation rules [idbi/proto-apis@66fd51018d10db7023e72d1a59aa16fa2ea668ff] ([a702ae8](https://github.com/idbi/goproto/commit/a702ae88adc292a2ad02b3f77c550ed98bb7436a))
+
 ## [0.1.6](https://github.com/idbi/goproto/compare/v0.1.5...v0.1.6) (2024-01-17)
 
 
