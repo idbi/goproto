@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/idbi/goproto/compare/v0.1.7...v0.2.0) (2024-02-07)
+
+
+### Features
+
+* split retry definition [idbi/proto-apis@d7a9ebd2bef70311420b15533f0ad3d661db87c7] ([43b8c23](https://github.com/idbi/goproto/commit/43b8c230e6832106b3ab8c5aad985ad7e5fa2376))
+
 ## [0.1.7](https://github.com/idbi/goproto/compare/v0.1.6...v0.1.7) (2024-01-19)
 
 
