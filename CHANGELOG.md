@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/idbi/goproto/compare/v0.2.0...v0.3.0) (2024-03-08)
+
+
+### Features
+
+* add name on task creation [idbi/proto-apis@b0db38708638acf9e34eb600d3a386e00dfda8da] ([e30203e](https://github.com/idbi/goproto/commit/e30203ef894c221be1331fa3712b06e8b5bc94fb))
+
 ## [0.2.0](https://github.com/idbi/goproto/compare/v0.1.7...v0.2.0) (2024-02-07)
 
 
